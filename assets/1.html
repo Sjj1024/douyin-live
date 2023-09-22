@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  wss = new WebSocket('wss://webcast3-ws-web-hl.douyin.com/webcast/im/push/v2/?app_name=douyin_web&version_code=180800&webcast_sdk_version=1.3.0&update_version_code=1.3.0&compress=gzip&internal_ext=internal_src:dim|wss_push_room_id:7171449668868967175|wss_push_did:7139391558914393612|dim_log_id:202211300147530101501400370A6F44B2|fetch_time:1669744073307|seq:1|wss_info:0-1669744073307-0-0|wrds_kvs:WebcastRoomStatsMessage-1669744071067345685_WebcastRoomRankMessage-1669744068050549306&cursor=r-1_d-1_u-1_h-1_t-1669744073307&host=https://live.douyin.com&aid=6383&live_id=1&did_rule=3&debug=false&endpoint=live_pc&support_wrds=1&im_path=/webcast/im/fetch/&device_platform=web&cookie_enabled=true&screen_width=1440&screen_height=900&browser_language=zh&browser_platform=MacIntel&browser_name=Mozilla&browser_version=5.0%20(Macintosh;%20Intel%20Mac%20OS%20X%2010_15_7)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/107.0.0.0%20Safari/537.36&browser_online=true&tz_name=Asia/Shanghai&identity=audience&room_id=7171449668868967175&heartbeatDuration=0')
+  wss.binaryType = "arraybuffer"
+  wss.addEventListener("open" , function (e) {
+      console.log("open" ,e)
+  })
+
+  wss.addEventListener("message" , function (e) {
+      console.log("message" ,e)
+  })
+
+  wss.addEventListener("close" , function (e) {
+      console.log("close" ,e)
+  })
+
+  wss.addEventListener("error" , function (e) {
+      console.log("error=>" ,e)
+  })
+</script>
+</html>

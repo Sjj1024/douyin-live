@@ -1,0 +1,6 @@
+{
+  "FULL_HD1 ": "http://pull-l3.douyincdn.com/stage/stream-7281558015155735335_or4.m3u8?auth_key=1695976351-0-0-88658671f265a45cdd77d14a52a7e763 ",
+  "HD1 ": "http://pull-l3.douyincdn.com/stage/stream-7281558015155735335_hd.m3u8?auth_key=1695976351-0-0-19b738ab7e5d8ab0366c593f1812bb00 ",
+  "SD1 ": "http://pull-l3.douyincdn.com/stage/stream-7281558015155735335_ld.m3u8?auth_key=1695976351-0-0-072c3232a9948b0584737fcdc267fc5a ",
+  "SD2 ": "http://pull-l3.douyincdn.com/stage/stream-7281558015155735335_sd.m3u8?auth_key=1695976351-0-0-48b91ea7311a17c021a3e64aafd8b318 "
+}

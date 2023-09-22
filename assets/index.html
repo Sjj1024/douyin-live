@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/1.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    var internal_ext = "internal_src:dim|wss_push_room_id:7171437667748416263|wss_push_did:7139391558914393612|dim_log_id:2022113000183501013303315000716EFE|fetch_time:1669738715966|seq:1|wss_info:0-1669738715966-0-0|wrds_kvs:WebcastRoomStatsMessage-1669738713027758200_WebcastRoomRankMessage-1669738696045105037"
+    var cursor = "u-1_h-1_t-1669738715966_r-1_d-1"
+    var a = {
+        "aid": "6383",
+        "app_name": "douyin_web",
+        "debug": false,
+        "did_rule": 3,
+        "endpoint": "live_pc",
+        "host": "https://live.douyin.com",
+        "im_path": "/webcast/im/fetch/",
+        "live_id": 1,
+        "support_wrds": 1
+    }
+    var e = {
+        "device_platform": "web",
+        "cookie_enabled": true,
+        "screen_width": 1440,
+        "screen_height": 900,
+        "browser_language": "zh",
+        "browser_platform": "MacIntel",
+        "browser_name": "Mozilla",
+        "browser_version": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
+        "browser_online": true,
+        "tz_name": "Asia/Shanghai",
+        "host": "https://live.douyin.com",
+        "aid": "6383",
+        "live_id": 1,
+        "app_name": "douyin_web",
+        "did_rule": 3,
+        "debug": false,
+        "endpoint": "live_pc",
+        "support_wrds": 1,
+        "im_path": "/webcast/im/fetch/",
+        "identity": "audience",
+        "room_id": "7171449668868967175",
+        // "room_id": "7171437667748416263",
+        "pushServer": "wss://webcast3-ws-web-lq.douyin.com/webcast/im/push/v2/",
+        "routeParamsMap": {"arr_": [], "valueCtor_": null, "map_": {}, "arrClean": true},
+        "heartbeatDuration": "0"
+    }
+
+    function rset(t, e) {
+        var n = {};
+        console.log(t)
+        for (var a in t)
+            Object.prototype.hasOwnProperty.call(t, a) && e.indexOf(a) < 0 && (n[a] = t[a]);
+        if (null != t && "function" == typeof Object.getOwnPropertySymbols) {
+            var r = 0;
+            for (a = Object.getOwnPropertySymbols(t); r < a.length; r++)
+                e.indexOf(a[r]) < 0 && Object.prototype.propertyIsEnumerable.call(t, a[r]) && (n[a[r]] = t[a[r]])
+        }
+        return n
+    }
+
+    function c(e) {
+        const t = Object.keys(e);
+        return t.length ? t.reduce(((t, o) => {
+                var r;
+                return `${t}${t ? "&" : ""}${o}=${String(null !== (r = e[o]) && void 0 !== r ? r : "")}`
+            }
+        ), "") : ""
+    }
+
+    function f() {
+        var fso;
+        try {
+            fso = new ActiveXObject("Scripting.FileSystemObject");
+        } catch (e) {
+            alert("当前浏览器不支持");
+            return;
+        }
+        return fso.createtextfile("1.json",true);
+    }
+
+    // console.log("rset", rset())
+    class m {
+        constructor(e) {
+            let t = function (e) {
+                const {app_name: t, routeParamsMap: o, pushServer: i} = e
+                    , a = (0,
+                    rset)(e, ["app_name", "routeParamsMap", "pushServer"])
+                    , n = {};
+                // console.log(i)
+                return `${i}?${c(Object.assign(Object.assign({
+                    app_name: t,
+                    version_code: 180800,
+                    webcast_sdk_version: '1.3.0',
+                    update_version_code: '1.3.0',
+                    compress: "gzip"
+                }, n), a))}`
+            }(e);
+            console.log("t=>",t)
+            this.socket = new WebSocket(t)
+            this.socket.binaryType = "arraybuffer"
+            // "undefined" != typeof WebSocket && (this.socket = new WebSocket(t), this.socket.binaryType = "arraybuffer")
+        }
+
+        onError(e) {
+            this.socket.addEventListener("error", e)
+        }
+
+        onMessage(e) {
+            this.socket.addEventListener("message", e)
+        }
+
+        onOpen(e) {
+            this.socket.addEventListener("open", e)
+        }
+
+        onClose(e) {
+            this.socket.addEventListener("close", e)
+        }
+    }
+
+    client = new m(Object.assign(Object.assign({
+        internal_ext: internal_ext,
+        cursor: cursor
+    }, a), e))
+
+    // console.log("client=>",client)
+    // console.log(client.socket.url)
+
+    client.onMessage((e => {
+            // console.log(e)
+        }
+    ))
+
+    client.onError((t => {
+            console.log("error=>", t)
+        }
+    ))
+    client.onClose((t => {
+            console.log("close=>", t)
+        }
+    ))
+    client.onOpen((() => {
+            console.log("open=>")
+        }
+    ))
+</script>
+</html>

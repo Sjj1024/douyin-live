@@ -1,0 +1,13 @@
+https://27-185-221-77.bytefcdnrd.com/gamereplay/stream-113773601265550000_sd.flv?302_type=cold_aggr&_session_id=037-20230922133306DED9E32963F164852CD1&abr_pts=-800&cb_retry=0&domain=pull-hs-f5.flive.douyincdn.com&fp_ab_versions=270&fp_user_url=https%3A%2F%2Fpull-hs-f5.flive.douyincdn.com%2Fgamereplay%2Fstream-113773601265550000_sd.flv%3Fabr_pts%3D-800%26_session_id%3D037-20230922133306DED9E32963F164852CD1&manage_ip=&node_id=&pro_type=http2&redirect_from=pod.cn-ngl7wz.vx0i.nss&vhost=push-rtmp-hs-f5.douyincdn.com
+
+# 修改后使用
+https://27-185-221-77.bytefcdnrd.com/gamereplay/stream-113773601265550000_sd.flv?302_type=cold_aggr&_session_id=037-20230922133330D347FDCFAC755F86F7E3&abr_pts=-800&cb_retry=0&domain=pull-hs-f5.flive.douyincdn.com&fp_ab_versions=270&fp_user_url=https%3A%2F%2Fpull-hs-f5.flive.douyincdn.com%2Fgamereplay%2Fstream-113773601265550000_sd.flv%3Fabr_pts%3D-800%26_session_id%3D037-20230922133306DED9E32963F164852CD1&manage_ip=&node_id=&pro_type=http2&redirect_from=pod.cn-ngl7wz.vx0i.nss&vhost=push-rtmp-hs-f5.douyincdn.com
+
+
+http://pull-hs-f5.flive.douyincdn.com/gamereplay/stream-113773601265550000_sd.flv?302_type=cold_aggr&
+
+# 另一个直播间链接
+https://180-213-250-92.bytefcdnrd.com/third/stream-690233119098274475_sd.flv?302_type=cold_aggr&_session_id=037-202309221405009E1762AB93B3E49D1C7A&abr_pts=-800&align_delay=-25&cb_retry=0&domain=pull-hs-f5.flive.douyincdn.com&expire=1695967500&fp_user_url=https%3A%2F%2Fpull-hs-f5.flive.douyincdn.com%2Fthird%2Fstream-690233119098274475_sd.flv%3Fexpire%3D1695967500%26sign%3D0fb069ddf750001e71909774a0c84907%26volcSecret%3D0fb069ddf750001e71909774a0c84907%26volcTime%3D1695967500%26abr_pts%3D-800%26_session_id%3D037-202309221405009E1762AB93B3E49D1C7A&manage_ip=&node_id=&pro_type=http2&redirect_from=pod.cn-6gv9iu.l8ly.nss&sign=0fb069ddf750001e71909774a0c84907&vhost=push-rtmp-hs-f5.douyincdn.com&volcSecret=0fb069ddf750001e71909774a0c84907&volcTime=1695967500
+
+# 直播链接提取
+https://27-185-221-77.bytefcdnrd.com/gamereplay/stream-113773601265550000_sd.flv?domain=pull-hs-f5.flive.douyincdn.com

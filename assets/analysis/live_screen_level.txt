@@ -1,0 +1,55 @@
+ {
+                                        "name": "标清",
+                                        "sdk_key": "ld",
+                                        "v_codec": "264",
+                                        "resolution": "540x960",
+                                        "level": 1,
+                                        "v_bit_rate": 1000000,
+                                        "additional_content": "",
+                                        "fps": 25,
+                                        "disable": 0
+                                    },
+                                    {
+                                        "name": "高清",
+                                        "sdk_key": "sd",
+                                        "v_codec": "264",
+                                        "resolution": "720x1280",
+                                        "level": 2,
+                                        "v_bit_rate": 2000000,
+                                        "additional_content": "",
+                                        "fps": 30,
+                                        "disable": 0
+                                    },
+                                    {
+                                        "name": "超清",
+                                        "sdk_key": "hd",
+                                        "v_codec": "264",
+                                        "resolution": "720x1280",
+                                        "level": 3,
+                                        "v_bit_rate": 4000000,
+                                        "additional_content": "",
+                                        "fps": 30,
+                                        "disable": 0
+                                    },
+                                    {
+                                        "name": "蓝光",
+                                        "sdk_key": "uhd",
+                                        "v_codec": "264",
+                                        "resolution": "1080x1920",
+                                        "level": 4,
+                                        "v_bit_rate": 0,
+                                        "additional_content": "",
+                                        "fps": 45,
+                                        "disable": 0
+                                    },
+                                    {
+                                        "name": "原画",
+                                        "sdk_key": "origin",
+                                        "v_codec": "264",
+                                        "resolution": "",
+                                        "level": 5,
+                                        "v_bit_rate": 0,
+                                        "additional_content": "",
+                                        "fps": 0,
+                                        "disable": 0
+                                    }

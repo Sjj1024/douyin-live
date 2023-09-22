@@ -1,0 +1,17 @@
+字段说明
+礼物名称：gift.name
+礼物价值(毛|抖币)：gift.diamondCount
+礼物数量：totalCount
+礼物描述：describe
+礼物ID：giftId
+礼物详情：gift
+赠送时间：sendTime
+
+点赞用户：user.nickName
+点赞消息：WebcastLikeMessage
+点赞统计：total
+
+
+评论用户：user.nickName
+评论消息：WebcastChatMessage
+评论内容：content

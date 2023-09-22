@@ -1,0 +1,355 @@
+{
+  "state": {
+    "isLiveModal": false,
+    "appStore": {
+      "store": null,
+      "needInital": false,
+      "linkMicHeartConfig": {
+        "disabled": true,
+        "whitleList": [
+          "608192707742",
+          "534000058337"
+        ]
+      },
+      "isOpenLongTask": true
+    },
+    "userStore": {
+      "store": null,
+      "userInfo": {},
+      "headerUserInfo": {
+        "isSpider": false,
+        "info": {},
+        "statusCode": 0
+      },
+      "odin": {
+        "user_id": "100774921845",
+        "user_type": 12,
+        "user_is_auth": 1,
+        "user_is_login": 1,
+        "user_unique_id": "7279403063450076732"
+      },
+      "userHandlerPause": false
+    },
+    "homeStore": {
+      "store": null,
+      "selectedRoom": null
+    },
+    "roomStore": {
+      "store": null,
+      "roomInfo": {
+        "room": {
+          "id_str": "7281578517102480183",
+          "status": 2,
+          "status_str": "2",
+          "title": "大叔的木工手作直播间",
+          "user_count_str": "3000+",
+          "cover": {
+            "url_list": [
+              "https://p6-webcast-sign.douyinpic.com/image-cut-tos-priv/655209f1881259d389ac779c0bd0aad9~tplv-qz53dukwul-common-resize:0:0.image?biz_tag=10\u0026classify=10\u0026from=webcast.room.pack\u0026scene_tag=enter_room\u0026x-expires=1697968724\u0026x-signature=eizuMK%2Fd3b6nrAoUnQ4jGwAOszU%3D",
+              "https://p9-webcast-sign.douyinpic.com/image-cut-tos-priv/655209f1881259d389ac779c0bd0aad9~tplv-qz53dukwul-common-resize:0:0.image?biz_tag=10\u0026classify=10\u0026from=webcast.room.pack\u0026scene_tag=enter_room\u0026x-expires=1697968724\u0026x-signature=HpEIaY4i7qJxxZIdnjc6aNFCPEw%3D"
+            ]
+          },
+          "stream_url": {
+            "flv_pull_url": {
+              "FULL_HD1": "http://pull-flv-l26.douyincdn.com/stage/stream-113774670912684171_or4.flv?expire=65169fd4\u0026sign=60f46ef0d8cf1c88ac3d025baf7bfdec",
+              "HD1": "http://pull-flv-l26.douyincdn.com/stage/stream-113774670912684171_hd.flv?expire=65169fd4\u0026sign=b17dbc0f91200274c8732c4726e5878f",
+              "SD1": "http://pull-flv-l26.douyincdn.com/stage/stream-113774670912684171_ld.flv?expire=65169fd4\u0026sign=16289a4f7eda74b66af077991d22bdd5",
+              "SD2": "http://pull-flv-l26.douyincdn.com/stage/stream-113774670912684171_sd.flv?expire=65169fd4\u0026sign=e41ddc857a43e12085634c6c7680ee1d"
+            },
+            "default_resolution": "HD1",
+            "hls_pull_url_map": {
+              "FULL_HD1": "http://pull-hls-l26.douyincdn.com/stage/stream-113774670912684171_or4.m3u8?expire=65169fd4\u0026sign=fa71b3c668fa38d515859a9a40832331",
+              "HD1": "http://pull-hls-l26.douyincdn.com/stage/stream-113774670912684171_hd.m3u8?expire=65169fd4\u0026sign=5504082bbfbdaa9b355d551e426ca636",
+              "SD1": "http://pull-hls-l26.douyincdn.com/stage/stream-113774670912684171_ld.m3u8?expire=65169fd4\u0026sign=b2f35e11c532e51011fbee4673d65f23",
+              "SD2": "http://pull-hls-l26.douyincdn.com/stage/stream-113774670912684171_sd.m3u8?expire=65169fd4\u0026sign=f1c09bedd7c499550d23d497b0f3c43d"
+            },
+            "hls_pull_url": "http://pull-hls-l26.douyincdn.com/stage/stream-113774670912684171_or4.m3u8?expire=65169fd4\u0026sign=fa71b3c668fa38d515859a9a40832331",
+            "stream_orientation": 1,
+            "live_core_sdk_data": {
+              "pull_data": {
+                "options": {
+                  "default_quality": {
+                    "name": "蓝光",
+                    "sdk_key": "origin",
+                    "v_codec": "264",
+                    "resolution": "1088x1920",
+                    "level": 4,
+                    "v_bit_rate": 0,
+                    "additional_content": "",
+                    "fps": 0,
+                    "disable": 0
+                  },
+                  "qualities": [
+                    {
+                      "name": "标清",
+                      "sdk_key": "ld",
+                      "v_codec": "264",
+                      "resolution": "480x847",
+                      "level": 1,
+                      "v_bit_rate": 1000000,
+                      "additional_content": "",
+                      "fps": 15,
+                      "disable": 0
+                    },
+                    {
+                      "name": "高清",
+                      "sdk_key": "sd",
+                      "v_codec": "264",
+                      "resolution": "540x952",
+                      "level": 2,
+                      "v_bit_rate": 1600000,
+                      "additional_content": "",
+                      "fps": 15,
+                      "disable": 0
+                    },
+                    {
+                      "name": "超清",
+                      "sdk_key": "hd",
+                      "v_codec": "264",
+                      "resolution": "720x1270",
+                      "level": 3,
+                      "v_bit_rate": 2000000,
+                      "additional_content": "",
+                      "fps": 15,
+                      "disable": 0
+                    },
+                    {
+                      "name": "蓝光",
+                      "sdk_key": "origin",
+                      "v_codec": "264",
+                      "resolution": "1088x1920",
+                      "level": 4,
+                      "v_bit_rate": 1809000,
+                      "additional_content": "",
+                      "fps": 0,
+                      "disable": 0
+                    }
+                  ]
+                },
+                "stream_data": "$12"
+              }
+            },
+            "extra": {
+              "height": 1920,
+              "width": 1088,
+              "fps": 0,
+              "max_bitrate": 0,
+              "min_bitrate": 0,
+              "default_bitrate": 0,
+              "bitrate_adapt_strategy": 0,
+              "anchor_interact_profile": 0,
+              "audience_interact_profile": 0,
+              "hardware_encode": false,
+              "video_profile": 0,
+              "h265_enable": false,
+              "gop_sec": 0,
+              "bframe_enable": false,
+              "roi": false,
+              "sw_roi": false,
+              "bytevc1_enable": false
+            },
+            "pull_datas": {}
+          },
+          "mosaic_status": 0,
+          "mosaic_status_str": "0",
+          "admin_user_ids": [],
+          "admin_user_ids_str": [],
+          "owner": {
+            "id_str": "70809547550",
+            "sec_uid": "MS4wLjABAAAAWrm7ZNRR3KGdoqUY4VZL3GifSVBCT3XVkGgMaGp1-t8",
+            "nickname": "百谷大叔【二叔】",
+            "avatar_thumb": {
+              "url_list": [
+                "https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_033b6396740c084dfd1cee282882011a.jpeg?from=3067671334",
+                "https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_033b6396740c084dfd1cee282882011a.jpeg?from=3067671334",
+                "https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_033b6396740c084dfd1cee282882011a.jpeg?from=3067671334"
+              ]
+            },
+            "follow_info": {
+              "follow_status": 0,
+              "follow_status_str": "0"
+            }
+          },
+          "room_auth": {
+            "Chat": true,
+            "Danmaku": false,
+            "Gift": true,
+            "LuckMoney": true,
+            "Digg": true,
+            "RoomContributor": true,
+            "Props": true,
+            "UserCard": true,
+            "POI": true,
+            "MoreAnchor": 1,
+            "Banner": 1,
+            "Share": 1,
+            "UserCorner": 0,
+            "Landscape": 1,
+            "LandscapeChat": 1,
+            "PublicScreen": 1,
+            "GiftAnchorMt": 0,
+            "RecordScreen": 2,
+            "DonationSticker": 0,
+            "HourRank": 0,
+            "CommerceCard": 1,
+            "AudioChat": 1,
+            "DanmakuDefault": 0,
+            "KtvOrderSong": 2,
+            "SelectionAlbum": 2,
+            "Like": 0,
+            "MultiplierPlayback": 0,
+            "DownloadVideo": 0,
+            "Collect": 2,
+            "TimedShutdown": 0,
+            "Seek": 0,
+            "Denounce": 0,
+            "Dislike": 0,
+            "OnlyTa": 0,
+            "CastScreen": 1,
+            "CommentWall": 1,
+            "BulletStyle": 0,
+            "ShowGamePlugin": 2,
+            "VSGift": 0,
+            "VSTopic": 0,
+            "VSRank": 0,
+            "AdminCommentWall": 0,
+            "CommerceComponent": 1,
+            "DouPlus": 1,
+            "GamePointsPlaying": 2,
+            "Poster": 2,
+            "Highlights": 2,
+            "TypingCommentState": 1,
+            "StrokeUpDownGuide": 1,
+            "UpRightStatsFloatingLayer": 1,
+            "CastScreenExplicit": 2,
+            "Selection": 2,
+            "IndustryService": 0,
+            "VerticalRank": 1,
+            "EnterEffects": 0,
+            "FansClub": 1,
+            "EmojiOutside": 0,
+            "CanSellTicket": 0,
+            "DouPlusPopularityGem": 0,
+            "MissionCenter": 0,
+            "ExpandScreen": 2,
+            "FansGroup": 2,
+            "Topic": 2,
+            "AnchorMission": 0,
+            "Teleprompter": 0,
+            "LongTouch": 2,
+            "SpecialStyle": {
+              "Chat": {
+                "UnableStyle": 0,
+                "Content": "主播已设置所有人可评论",
+                "OffType": 0,
+                "AnchorSwitchForPaidLive": 0,
+                "ContentForPaidLive": ""
+              },
+              "Like": {
+                "UnableStyle": 0,
+                "Content": "",
+                "OffType": 0,
+                "AnchorSwitchForPaidLive": 0,
+                "ContentForPaidLive": ""
+              }
+            },
+            "FixedChat": 2,
+            "QuizGamePointsPlaying": 2
+          },
+          "live_room_mode": 0,
+          "stats": {
+            "total_user_desp": "",
+            "like_count": 0,
+            "total_user_str": "10万+",
+            "user_count_str": "3603"
+          },
+          "has_commerce_goods": true,
+          "linker_map": {},
+          "linker_detail": {
+            "linker_play_modes": [],
+            "big_party_layout_config_version": 0,
+            "accept_audience_pre_apply": true,
+            "linker_ui_layout": 0,
+            "enable_audience_linkmic": 0,
+            "function_type": "",
+            "linker_map_str": {},
+            "ktv_lyric_mode": "",
+            "init_source": "",
+            "forbid_apply_from_other": false,
+            "ktv_exhibit_mode": 0,
+            "enlarge_guest_turn_on_source": 0,
+            "playmode_detail": {}
+          },
+          "room_view_stats": {
+            "is_hidden": false,
+            "display_short": "3603",
+            "display_middle": "3603",
+            "display_long": "3603在线观众",
+            "display_value": 3603,
+            "display_version": 1663849727,
+            "incremental": false,
+            "display_type": 1,
+            "display_short_anchor": "3603",
+            "display_middle_anchor": "3603",
+            "display_long_anchor": "3603在线观众"
+          },
+          "scene_type_info": {
+            "is_union_live_room": false,
+            "is_life": false,
+            "is_protected_room": 0,
+            "is_lasted_goods_room": 1,
+            "is_desire_room": 2,
+            "commentary_type": false
+          },
+          "toolbar_data": {
+            "entrance_list": [
+              {
+                "group_id": 0,
+                "component_type": 1,
+                "op_type": 0,
+                "text": "购物车",
+                "schema_url": "",
+                "show_type": 3,
+                "data_status": 1,
+                "extra": ""
+              },
+              {
+                "group_id": 5,
+                "component_type": 24,
+                "op_type": 0,
+                "text": "更多",
+                "schema_url": "",
+                "show_type": 1,
+                "data_status": 1,
+                "extra": ""
+              },
+              {
+                "group_id": 6,
+                "component_type": 29,
+                "op_type": 0,
+                "text": "快捷送礼",
+                "schema_url": "",
+                "icon": {
+                  "url_list": [
+                    "https://p3-webcast.douyinpic.com/img/webcast/0ea40b8376ef8157791b928a339ed9c9~tplv-resize:0:0.image",
+                    "https://p6-webcast.douyinpic.com/img/webcast/0ea40b8376ef8157791b928a339ed9c9~tplv-resize:0:0.image",
+                    "https://p11-webcast.douyinpic.com/img/webcast/0ea40b8376ef8157791b928a339ed9c9~tplv-resize:0:0.image"
+                  ],
+                  "uri": "webcast/0ea40b8376ef8157791b928a339ed9c9",
+                  "height": 0,
+                  "width": 0,
+                  "avg_color": "#BCBCE0",
+                  "image_type": 0,
+                  "open_web_url": "",
+                  "is_animated": false,
+                  "flex_setting_list": [],
+                  "text_setting_list": []
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

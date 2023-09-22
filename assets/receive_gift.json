@@ -1,0 +1,114 @@
+{
+  "common": {
+    "method": "WebcastGiftMessage",
+    "msgId": "7280765410109805625",
+    "roomId": "7280723029630077757",
+    "createTime": "1695185334",
+    "isShowMsg": true,
+    "describe": "二***:送给主播 1个入团卡",
+    "priorityScore": "31000"
+  },
+  "giftId": "3242",
+  "groupCount": "1",
+  "repeatCount": "1",
+  "comboCount": "1",
+  "user": {
+    "id": "111111",
+    "nickName": "二***",
+    "gender": 1,
+    "AvatarThumb": {
+      "urlListList": [
+        "http://p3-webcast.douyinpic.com/img/webcast/small_DefAvatar.png~tplv-obj.image",
+        "http://p6-webcast.douyinpic.com/img/webcast/small_DefAvatar.png~tplv-obj.image",
+        "http://p11-webcast.douyinpic.com/img/webcast/small_DefAvatar.png~tplv-obj.image"
+      ],
+      "uri": "webcast/small_DefAvatar.png",
+      "avgColor": "#7A6053"
+    },
+    "BadgeImageList": [
+      {
+        "urlListList": [
+          "http://p6-webcast.douyinpic.com/img/webcast/new_user_grade_level_v1_17.png~tplv-obj.image",
+          "http://p3-webcast.douyinpic.com/img/webcast/new_user_grade_level_v1_17.png~tplv-obj.image",
+          "http://p11-webcast.douyinpic.com/img/webcast/new_user_grade_level_v1_17.png~tplv-obj.image"
+        ],
+        "uri": "webcast/new_user_grade_level_v1_17.png",
+        "height": "16",
+        "width": "32",
+        "imageType": 1,
+        "content": {
+          "level": "17",
+          "alternativeText": "荣誉等级17级勋章"
+        }
+      }
+    ],
+    "FollowInfo": {
+      "followingCount": "63",
+      "followerCount": "2040",
+      "followerCountStr": "2040",
+      "followingCountStr": "63"
+    },
+    "idStr": "111111"
+  },
+  "repeatEnd": 1,
+  "groupId": "1695185331",
+  "gift": {
+    "image": {
+      "urlListList": [
+        "http://p11-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png",
+        "http://p3-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png",
+        "http://p6-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png"
+      ],
+      "uri": "webcast/698373dfdac86a90b54facdc38698cbc",
+      "avgColor": "#7A5353"
+    },
+    "describe": "送出入团卡",
+    "id": "3242",
+    "combo": true,
+    "type": 1,
+    "diamondCount": 1,
+    "name": "入团卡",
+    "icon": {
+      "urlListList": [
+        "http://p3-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png",
+        "http://p6-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png",
+        "http://p11-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png"
+      ],
+      "uri": "webcast/698373dfdac86a90b54facdc38698cbc",
+      "avgColor": "#A37C96"
+    }
+  },
+  "publicAreaCommon": {
+    "userLabel": {
+      "urlListList": [
+        "http://p3-webcast.douyinpic.com/img/webcast/userlabel_new_watch.png~tplv-obj.image",
+        "http://p11-webcast.douyinpic.com/img/webcast/userlabel_new_watch.png~tplv-obj.image",
+        "http://p6-webcast.douyinpic.com/img/webcast/userlabel_new_watch.png~tplv-obj.image"
+      ],
+      "uri": "webcast/userlabel_new_watch.png",
+      "avgColor": "#523749"
+    }
+  },
+  "trayDisplayText": {
+    "key": "webcast_aweme_tray_message_to_anchor",
+    "defaultPatter": "送{0}",
+    "defaultFormat": {
+      "color": "#B3FFFFFF",
+      "weight": 400,
+      "useRemoteClor": true
+    },
+    "piecesList": [
+      {
+        "type": true,
+        "format": {
+          "color": "#B3FFFFFF",
+          "weight": 400,
+          "useRemoteClor": true
+        }
+      }
+    ]
+  },
+  "bannedDisplayEffects": "3",
+  "clientGiftSource": 1,
+  "traceId": "666666_1_686551027687032_1855594308836783_20230920"
+}
