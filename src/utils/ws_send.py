@@ -1,6 +1,5 @@
 import websocket
 import threading
-
 from config import LIVE_WEB_SEND
 
 
@@ -26,6 +25,13 @@ def send_msg(msg: str):
     print("对外提供的方法" + msg)
 
 
+def ws_sender(msg):
+    if ws_send.keep_running:
+        ws_send.send(msg)
+    else:
+        pass
+
+
 # 创建WebSocket连接
 ws_send = websocket.WebSocketApp("ws://192.168.110.196:8989/echo",
                                  on_open=on_open,
@@ -40,3 +46,5 @@ if LIVE_WEB_SEND:
     t = threading.Thread(target=ws_send.run_forever)
     t.start()
     # ws_send.run_forever()
+else:
+    ws_send.close()

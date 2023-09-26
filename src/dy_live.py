@@ -2,13 +2,14 @@ import _thread
 import binascii
 import gzip
 import json
-from src.logger import logger
+from src.utils.logger import logger
 import re
 import time
 import requests
 import websocket
-from src.send import ws_send
+from src.utils.ws_send import ws_send, ws_sender
 from src import live_rank
+from src.utils.common import GlobalVal
 from protobuf_inspector.types import StandardParser
 from google.protobuf import json_format
 from proto.dy_pb2 import PushFrame
@@ -30,13 +31,6 @@ ttwid = ""
 roomStore = ""
 liveRoomTitle = ''
 live_stream_url = ""
-# 直播统计的全局变量
-like_num = 0
-commit_num = 0
-gift_num = 0
-gift_value = 0
-# 记录直播间人数
-member_num = 0
 # 记录抓取直播时间
 start_time = time.time()
 
@@ -153,34 +147,32 @@ def unPackWebcastSocialMessage(data):
 
 # 普通消息
 def unPackWebcastChatMessage(data):
-    global commit_num
-    commit_num += 1
+    GlobalVal.commit_num += 1
     chatMessage = ChatMessage()
     chatMessage.ParseFromString(data)
     data = json_format.MessageToDict(chatMessage, preserving_proto_field_name=True)
     log = json.dumps(data, ensure_ascii=False)
-    logger.info(f'[unPackWebcastChatMessage] [直播间弹幕消息{commit_num}] [房间Id：' + liveRoomId + '] | ' + log)
+    logger.info(
+        f'[unPackWebcastChatMessage] [直播间弹幕消息{GlobalVal.commit_num}] [房间Id：' + liveRoomId + '] | ' + log)
     return data
 
 
 # 礼物消息
 def unPackWebcastGiftMessage(data):
-    global gift_num
-    global gift_value
     giftMessage = GiftMessage()
     giftMessage.ParseFromString(data)
     data = json_format.MessageToDict(giftMessage, preserving_proto_field_name=True)
     try:
         gift_name = data.get("gift").get("name")
-        gift_num += int(data.get("totalCount", 1))
-        gift_value += (int(data["gift"]["diamondCount"]) * int(data.get("totalCount", 1)))
+        GlobalVal.gift_num += int(data.get("totalCount", 1))
+        GlobalVal.gift_value += (int(data["gift"]["diamondCount"]) * int(data.get("totalCount", 1)))
         # 将消息发送到我们自己的服务器:websocket链接
-        ws_send.send(f"收到礼物: {gift_name}，礼物数量:{gift_num}，礼物价值: {gift_value}")
+        ws_sender(f"收到礼物: {gift_name}，礼物数量:{GlobalVal.gift_num}，礼物价值: {GlobalVal.gift_value}")
     except Exception as e:
-        logger.error(f"解析出错: {e}")
+        logger.error(f"解析礼物数据出错: {e}")
     log = json.dumps(data, ensure_ascii=False)
     logger.info(
-        f'[unPackWebcastGiftMessage] [直播间礼物消息{gift_num}:{gift_value}] [房间Id：' + liveRoomId + '] ' + log)
+        f'[unPackWebcastGiftMessage] [直播间礼物消息{GlobalVal.gift_num}:{GlobalVal.gift_value}] [房间Id：' + liveRoomId + '] ' + log)
     return data
 
 
@@ -199,11 +191,11 @@ def unPackWebcastMemberMessage(data):
 
 # 点赞
 def unPackWebcastLikeMessage(data):
-    global like_num
     likeMessage = LikeMessage()
     likeMessage.ParseFromString(data)
     data = json_format.MessageToDict(likeMessage, preserving_proto_field_name=True)
-    like_num = int(data["total"])
+    # like_num = int(data["total"])
+    GlobalVal.like_num = int(data["total"])
     log = json.dumps(data, ensure_ascii=False)
     logger.info(f'[unPackWebcastLikeMessage] [直播间点赞统计{data["total"]}] [房间Id：' + liveRoomId + '] | ' + log)
     return data
@@ -238,10 +230,10 @@ def onClose(ws, a, b):
     # 统计最后的数据
     end_time = time.time()
     total_time = end_time - start_time
-    total_info = f"直播抓取时长：{total_time}，点赞数量总计：{like_num}, 评论数量总计: {commit_num}, 礼物数量总计：{gift_num}, 礼物价值总计: {gift_value}"
+    total_info = f"直播抓取时长：{total_time}，点赞数量总计：{GlobalVal.like_num}, 评论数量总计: {GlobalVal.commit_num}, 礼物数量总计：{GlobalVal.gift_num}, 礼物价值总计: {GlobalVal.gift_value}"
     logger.info(total_info)
     # 将消息发送到我们自己的服务器
-    # ws_send.send(total_info)
+    # ws_sender(total_info)
     logger.info('[onClose] [webSocket Close事件] [房间Id：' + liveRoomId + ']')
 
 
@@ -302,14 +294,19 @@ def parseLiveRoomUrl(url):
     logger.info(f"主播账号信息: {live_room_info}")
     # 直播间id
     liveRoomId = res_room.group(1)
-    # 获取m3u8直播流地址
+    # 获取m3u8直播流地址：m3u8直播比flv延迟2秒左右
     res_stream = re.search(r'hls_pull_url_map\\":(\{.*?})', res)
     res_stream_m3u8s = json.loads(res_stream.group(1).replace('\\"', '"'))
-    res_m3u8_hd1 = res_stream_m3u8s.get("HD1", "").replace("http", "https")
+    # HD1和FULL_HD1随机获取，优先获取FULL_HD1
+    res_m3u8_hd1 = res_stream_m3u8s.get("FULL_HD1", "").replace("http", "https")
+    if not res_m3u8_hd1:
+        res_m3u8_hd1 = res_m3u8_hd1.get("HD1", "").replace("http", "https")
     logger.info(f"直播流m3u8链接地址是: {res_m3u8_hd1}")
-    # 找到flv直播流地址
+    # 找到flv直播流地址:区分标清|高清|蓝光
     res_flv_search = re.search(r'flv\\":\\"(.*?)\\"', res)
-    res_stream_flv = res_flv_search.group(1).replace('\\"', '"').replace("\\\\u0026", "&").replace("http", "https")
+    res_stream_flv = res_flv_search.group(1).replace('\\"', '"').replace("\\\\u0026", "&")
+    if "https" not in res_stream_flv:
+        res_stream_flv = res_stream_flv.replace("http", "https")
     logger.info(f"直播流FLV地址是: {res_stream_flv}")
     # 开始获取直播间排行
     live_rank.interval_rank(liveRoomId)

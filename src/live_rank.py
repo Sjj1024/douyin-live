@@ -1,7 +1,8 @@
 import threading
 import time
-from src.logger import logger
-
+from config import LIVE_RANK_INTERVAL
+from src.utils.logger import logger
+from src.utils.common import GlobalVal
 import requests
 
 
@@ -23,7 +24,18 @@ def get_rank(room_id):
     }
     response = requests.request("GET", url, headers=headers, data=payload)
     rank_list = response.json()
-    logger.info(f"[liveRankList] 直播间在线观众排名: {response.text}")
+    logger.info(f"[liveRankList] 直播间在线观众排名: {rank_list}")
+    # 获取前三名然后只要昵称数据和排名
+    ranks_list = rank_list.get("data").get("ranks")[:3]
+    ranks_three = []
+    for rank in ranks_list:
+        ranks_three.append({
+            "nickname": rank.get("user").get("nickname"),
+            "rank": rank.get("rank")
+        })
+    GlobalVal.rank_user = ranks_three
+    logger.info(f"更新打赏排行: {ranks_three}")
+    print(f"更新打赏排行: {ranks_three}")
 
 
 def handle_rank(roo_id, delay):
@@ -32,9 +44,9 @@ def handle_rank(roo_id, delay):
         time.sleep(delay)
 
 
-def interval_rank(roo_id, delay=30):
-    print("间隔30秒更新一下排行")
-    rank_t = threading.Thread(target=handle_rank, args=(roo_id, delay))
+def interval_rank(roo_id):
+    print(f"间隔{LIVE_RANK_INTERVAL}秒更新一下排行")
+    rank_t = threading.Thread(target=handle_rank, args=(roo_id, LIVE_RANK_INTERVAL))
     rank_t.start()
 
 

@@ -1,5 +1,7 @@
 # 抖音直播弹幕爬取 python 实现
-抖音弹幕抓取，礼物抓取等，模拟js脚本
+
+抖音弹幕抓取，礼物抓取，直播流地址抓取，可以抓取到m3u8直播流链接，还有flv直播流链接，还有直播礼物打赏排名，在线观众排名等等。  
+可配置服务端地址，将数据推送到自己的服务器，可以控制是否开启推送等配置。可以控制是否保存lOG文件等配置
 
 ## 环境
 
@@ -7,12 +9,53 @@
 python 3.9
 ```
 
-## 运行
-然后打开浏览器，打开抖音直播，然后将直播地址黏贴到main.py中，然后运行程序即可看到效果。
-```bash
+## 安装依赖
+
+```shell
 pip install -r requirements.txt
+```
+
+## 运行
+
+然后打开浏览器，打开抖音直播，然后将直播地址黏贴到main.py中，然后运行程序即可看到效果。
+
+```shell
 python main.py
 ```
+
+## 动态配置
+```python
+# 配置日志信息
+LOG_FILE_SAVE = False
+LOG_FILE_NAME = "log.txt"
+LOG_LEVEL = ""
+LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
+
+# 直播信息配置：直播地址，直播用户排名，直播排名抓取间隔，直播推送到后台，推送到后台地址
+LIVE_ROOM_URL = ""
+LIVE_RANK_LIST = True
+# 获取礼物排名时间间隔
+LIVE_RANK_INTERVAL = 5
+# 使用ws推送直播数据
+LIVE_WEB_SEND = False
+# 是否开启HTTP推送
+LIVE_HTTP_SEND = True
+# HTTP推送地址
+LIVE_WEB_SEND_URL = "*******************"
+# 应援UUID
+DONATION_UUID = "73ba8e83-e32d-4ef0-8eca-5877a4f5fab4"
+```
+
+## 直播流地址
+
+直播流地址可以使用在线播放工具测试是否可以正常播放直播内容  
+西瓜播放器(支持flv直播流)：https://h5player.bytedance.com/generate/
+m3u8在线播放器(播放m3u8流)：http://tool.pfan.cn/m3u8/
+
+## TODO BUG
+
+有的直播有可能获取不到m3u8的链接，待研究：https://live.douyin.com/3652616706
+flv直播流地址区分标清|高清|蓝光地址，需要都获取到
 
 ## 运行效果
 
@@ -71,3 +114,10 @@ python main.py
 2023-09-19 09:24:06,444 - INFO - [onMessage] [待解析方法WebcastRoomDataSyncMessage等待解析～] [房间Id：7280320195300821760]
 2023-09-19 09:24:06,444 - INFO - [sendAck] [🌟发送Ack] [房间Id：7280320195300821760] ====> 房间🏖标题【】
 ```
+
+## uuid记录
+
+taskuuid：对应的是每个方法名称
+gameuuid：一场比赛对应的uuid，在某个地方可以修改（页面上或者哪里），测试可以使用页面上的
+teamuuid：每个队伍对应的uuid，查询队伍的时候会返回给我
+uuid：应援的uuid，是添加应援的时候，返回给我

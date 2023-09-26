@@ -36,6 +36,5 @@ https://live.douyin.com/aweme/v1/web/im/user/active/update/?device_platform=weba
 https://live.douyin.com/webcast/ranklist/audience/?aid=6383&app_name=douyin_web&live_id=1&device_platform=web&language=zh-CN&cookie_enabled=true&screen_width=2560&screen_height=1440&browser_language=zh-CN&browser_platform=Win32&browser_name=Chrome&browser_version=117.0.0.0&webcast_sdk_version=2450&room_id=7280812881519020859&anchor_id=100398901785&sec_anchor_id=MS4wLjABAAAAp0RdcUnlcndqBkqbPB-WR3_wZS72cvvfHkpGPqg1OOM&rank_type=30
 
 需要获取：
-
 1.可以在直播页获取的：anchor_id(), sec_anchor_id(sec_uid)
 # 在web_rid关键词附近

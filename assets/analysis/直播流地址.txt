@@ -1,0 +1,6 @@
+标清：https://pull-flv-l11-admin.douyincdn.com/stage/stream-7282563233892797218_md.flv?expire=1696212265&sign=f59db693cdfb8de0cdc696f65f72070c
+高清：https://8503cf2605f64dc7237774123427a104.h2.smtcdns.net/pull-flv-l11.douyincdn.com/stage/stream-7282563233892797218_or4.flv?expire=1696212253&sign=e2aa3358032c8d7ef06416b378529fa3&abr_pts=-800&_session_id=037-202309251004132858E42AF1DD948CBAD2&TxLiveCode=cold_stream&TxDispType=3&svr_type=live_oc&tencent_test_client_ip=116.232.39.3&dispatch_from=OC_MGR115.231.143.219&utime=1695607453967
+蓝光：https://pull-flv-l11-admin.douyincdn.com/stage/stream-7282563233892797218_md.flv?expire=1696212265&sign=f59db693cdfb8de0cdc696f65f72070c
+
+# 拼接高清链接
+http://pull-flv-l11.douyincdn.com/stage/stream-7282563233892797218_or4.flv?expire=1696212642&sign=8993b81f025b64ff8e1372da26b0b07d
