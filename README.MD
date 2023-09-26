@@ -12,12 +12,13 @@ python 3.9
 ## 安装依赖
 
 ```shell
-pip install -r requirements.txt
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 ```
 
 ## 运行
 
 然后打开浏览器，打开抖音直播，然后将直播地址黏贴到main.py中，然后运行程序即可看到效果。
+注意：如果要获取排名，需要将时间间隔设置大一点，否则抓取频繁会获取不到数据：打包房间人数失败
 
 ```shell
 python main.py
@@ -49,12 +50,12 @@ DONATION_UUID = "73ba8e83-e32d-4ef0-8eca-5877a4f5fab4"
 ## 直播流地址
 
 直播流地址可以使用在线播放工具测试是否可以正常播放直播内容  
-西瓜播放器(支持flv直播流)：https://h5player.bytedance.com/generate/
-m3u8在线播放器(播放m3u8流)：http://tool.pfan.cn/m3u8/
+西瓜播放器(支持flv直播流)：https://h5player.bytedance.com/generate/  
+m3u8在线播放器(播放m3u8流)：http://tool.pfan.cn/m3u8/  
 
 ## TODO BUG
 
-有的直播有可能获取不到m3u8的链接，待研究：https://live.douyin.com/3652616706
+有的直播有可能获取不到m3u8的链接，待研究：https://live.douyin.com/3652616706  
 flv直播流地址区分标清|高清|蓝光地址，需要都获取到
 
 ## 运行效果

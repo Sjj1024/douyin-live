@@ -1,6 +1,6 @@
 import threading
 import time
-from config import LIVE_RANK_INTERVAL
+from config import LIVE_RANK_INTERVAL, LIVE_RANK_LIST
 from src.utils.logger import logger
 from src.utils.common import GlobalVal
 import requests
@@ -46,10 +46,13 @@ def handle_rank(roo_id, delay):
 
 def interval_rank(roo_id):
     print(f"间隔{LIVE_RANK_INTERVAL}秒更新一下排行")
-    rank_t = threading.Thread(target=handle_rank, args=(roo_id, LIVE_RANK_INTERVAL))
-    rank_t.start()
+    if LIVE_RANK_LIST:
+        rank_t = threading.Thread(target=handle_rank, args=(roo_id, LIVE_RANK_INTERVAL))
+        rank_t.start()
+    else:
+        print(f"未开启直播礼物排名")
 
 
 if __name__ == '__main__':
-    room_id = "7280828207350221620"
-    get_rank(room_id)
+    room_id = "7282911872611830584"
+    interval_rank(room_id)

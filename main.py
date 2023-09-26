@@ -9,5 +9,5 @@ if __name__ == '__main__':
     # 推送直播点赞等数据
     send_start()
     # 修改为你的直播地址
-    live_id = "https://live.douyin.com/266087841771"
+    live_id = "https://live.douyin.com/80017709309"
     dy_live.parseLiveRoomUrl(live_id)

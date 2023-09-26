@@ -183,7 +183,7 @@ def unPackWebcastMemberMessage(data):
     memberMessage.ParseFromString(data)
     data = json_format.MessageToDict(memberMessage, preserving_proto_field_name=True)
     # 直播间人数统计
-    member_num = int(data.get("memberCount"))
+    member_num = int(data.get("memberCount", 0))
     log = json.dumps(data, ensure_ascii=False)
     logger.info(f'[unPackWebcastMemberMessage] [直播间成员加入: {member_num}] [房间Id：' + liveRoomId + '] | ' + log)
     return data
@@ -195,7 +195,7 @@ def unPackWebcastLikeMessage(data):
     likeMessage.ParseFromString(data)
     data = json_format.MessageToDict(likeMessage, preserving_proto_field_name=True)
     # like_num = int(data["total"])
-    GlobalVal.like_num = int(data["total"])
+    GlobalVal.like_num = int(data.get("total", 0))
     log = json.dumps(data, ensure_ascii=False)
     logger.info(f'[unPackWebcastLikeMessage] [直播间点赞统计{data["total"]}] [房间Id：' + liveRoomId + '] | ' + log)
     return data
