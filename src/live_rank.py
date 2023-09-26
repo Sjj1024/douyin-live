@@ -24,7 +24,7 @@ def get_rank(room_id):
     }
     response = requests.request("GET", url, headers=headers, data=payload)
     rank_list = response.json()
-    logger.info(f"[liveRankList] 直播间在线观众排名: {rank_list}")
+    # logger.info(f"[liveRankList] 直播间在线观众排名: {rank_list}")
     # 获取前三名然后只要昵称数据和排名
     ranks_list = rank_list.get("data").get("ranks")[:3]
     ranks_three = []

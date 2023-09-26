@@ -11,8 +11,8 @@ file_fmt = "%(asctime)s - %(levelname)s - %(message)s"
 if LOG_FILE_SAVE:
     file_path = os.path.join(os.getcwd(), LOG_FILE_NAME)
     logging.basicConfig(level=LOG_LEVEL, format=file_fmt, filename=file_path, filemode="a", encoding="utf-8")
-else:
-    logging.basicConfig(level=LOG_LEVEL, format=file_fmt)
+# else:
+#     logging.basicConfig(level=LOG_LEVEL, format=file_fmt)
 console_handler = logging.StreamHandler()
 # 第三步：添加控制台文本处理器
 console_handler.setLevel(level=LOG_LEVEL)

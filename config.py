@@ -10,13 +10,13 @@ LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 LIVE_ROOM_URL = ""
 # 是否抓取在线打赏排名
 LIVE_RANK_LIST = True
-# 获取礼物排名时间间隔
-LIVE_RANK_INTERVAL = 30
+# 获取礼物排名时间间隔: 建议不要低于10秒
+LIVE_RANK_INTERVAL = 15
 # 使用ws推送直播数据
 LIVE_WEB_SEND = False
 # 是否开启HTTP推送
 LIVE_HTTP_SEND = True
 # HTTP推送地址
-LIVE_WEB_SEND_URL = "http://dev.*******/game/gamemgnt"
+LIVE_WEB_SEND_URL = "http://dev.degnity.com:8087/game/gamemgnt"
 # 应援UUID
 DONATION_UUID = "efa3fc3d-efb8-4201-82fa-92d9aeaeb98d"
