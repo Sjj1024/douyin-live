@@ -17,6 +17,6 @@ LIVE_WEB_SEND = False
 # 是否开启HTTP推送
 LIVE_HTTP_SEND = True
 # HTTP推送地址
-LIVE_WEB_SEND_URL = "http://dev.degnity.com:8087/game/gamemgnt"
+LIVE_WEB_SEND_URL = "http://dev.*******/game/gamemgnt"
 # 应援UUID
 DONATION_UUID = "efa3fc3d-efb8-4201-82fa-92d9aeaeb98d"
