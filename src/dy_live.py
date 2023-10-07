@@ -2,6 +2,11 @@ import _thread
 import binascii
 import gzip
 import json
+import os
+import signal
+import sys
+
+from config import LIVE_GIFT_LIST
 from src.utils.logger import logger
 import re
 import time
@@ -164,6 +169,12 @@ def unPackWebcastGiftMessage(data):
     data = json_format.MessageToDict(giftMessage, preserving_proto_field_name=True)
     try:
         gift_name = data.get("gift").get("name")
+        nick_name = data.get("user").get("nickName")
+        # 对特殊礼物单独统计
+        if gift_name in LIVE_GIFT_LIST:
+            logger.info(f"抓到特殊礼物了: {gift_name}，用户名：{nick_name}")
+            GlobalVal.gift_list.append(f"0-{nick_name}")
+        # 特殊礼物价值依然统计
         GlobalVal.gift_num += int(data.get("totalCount", 1))
         GlobalVal.gift_value += (int(data["gift"]["diamondCount"]) * int(data.get("totalCount", 1)))
         # 将消息发送到我们自己的服务器:websocket链接
@@ -235,6 +246,9 @@ def onClose(ws, a, b):
     # 将消息发送到我们自己的服务器
     # ws_sender(total_info)
     logger.info('[onClose] [webSocket Close事件] [房间Id：' + liveRoomId + ']')
+    # 直播结束退出程序
+    pid = os.getpid()  # 获取当前进程的PID
+    os.kill(pid, signal.SIGTERM)
 
 
 def onOpen(ws):
@@ -289,9 +303,11 @@ def parseLiveRoomUrl(url):
     res_room = re.search(r'roomId\\":\\"(\d+)\\"', res)
     # 获取直播主播的uid和昵称等信息
     live_room_search = re.search(r'owner\\":(.*?),\\"room_auth', res)
+    # 如果没有获取到live_room信息，很有可能是直播已经关闭了，待优化
     live_room_res = live_room_search.group(1).replace('\\"', '"')
     live_room_info = json.loads(live_room_res)
     logger.info(f"主播账号信息: {live_room_info}")
+    print(f"主播账号信息: {live_room_info}")
     # 直播间id
     liveRoomId = res_room.group(1)
     # 获取m3u8直播流地址：m3u8直播比flv延迟2秒左右

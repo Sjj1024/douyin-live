@@ -2,7 +2,7 @@ import json
 import threading
 import time
 import requests
-from config import DONATION_UUID, LIVE_WEB_SEND_URL, LIVE_HTTP_SEND
+from config import DONATION_UUID, LIVE_WEB_SEND_URL, LIVE_HTTP_SEND, LIVE_SEND_INTERVAL
 from src.utils.common import GlobalVal
 
 
@@ -15,6 +15,7 @@ def sender():
         "applypoint": GlobalVal.like_num,
         "popmsg": GlobalVal.commit_num,
         "giftlist": GlobalVal.gift_value,
+        "fannamereadylist": "|".join(GlobalVal.gift_list),
         "donationdetail": json.dumps(GlobalVal.rank_user)
     })
     headers = {
@@ -29,7 +30,7 @@ def sender():
 def http_send():
     print("http sender")
     while True:
-        time.sleep(3)
+        time.sleep(LIVE_SEND_INTERVAL)
         # 防止中间重启推送0数据
         sender()
 
