@@ -1,0 +1,103 @@
+{
+  'common': {
+    'method': 'WebcastGiftMessage',
+    'msgId': '7283420150152942632',
+    'roomId': '7283413007005207308',
+    'createTime': '1695803662805',
+    'isShowMsg': True,
+    'describe': '莎***:送给主播 1个入团卡',
+    'priorityScore': '31000'
+  },
+  'giftId': '3242',
+  'groupCount': '1',
+  'repeatCount': '1',
+  'comboCount': '1',
+  'user': {
+    'id': '111111',
+    'nickName': '莎***',
+    'gender': 2,
+    'AvatarThumb': {
+      'urlListList': [
+        'http://p11-webcast.douyinpic.com/img/webcast/small_DefAvatar.png~tplv-obj.image',
+        'http://p3-webcast.douyinpic.com/img/webcast/small_DefAvatar.png~tplv-obj.image',
+        'http://p6-webcast.douyinpic.com/img/webcast/small_DefAvatar.png~tplv-obj.image'
+      ],
+      'uri': 'webcast/small_DefAvatar.png',
+      'avgColor': '#E0C8BC'
+    },
+    'BadgeImageList': [
+      {
+        'urlListList': [
+          'http://p11-webcast.douyinpic.com/img/webcast/fansclub_level_v6_9.png~tplv-obj.image',
+          'http://p6-webcast.douyinpic.com/img/webcast/fansclub_level_v6_9.png~tplv-obj.image',
+          'http://p3-webcast.douyinpic.com/img/webcast/fansclub_level_v6_9.png~tplv-obj.image'
+        ],
+        'uri': 'webcast/fansclub_level_v6_9.png',
+        'imageType': 7,
+        'content': {
+          'name': '挚爱',
+          'fontColor': '#FFFFFF',
+          'level': '9',
+          'alternativeText': '挚爱粉丝团勋章'
+        }
+      }
+    ],
+    'FollowInfo': {
+      'followingCount': '25',
+      'followerCount': '620',
+      'followerCountStr': '620',
+      'followingCountStr': '25'
+    },
+    'idStr': '111111'
+  },
+  'groupId': '1695803662',
+  'gift': {
+    'image': {
+      'urlListList': [
+        'http://p11-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png',
+        'http://p3-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png',
+        'http://p6-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png'
+      ],
+      'uri': 'webcast/698373dfdac86a90b54facdc38698cbc',
+      'avgColor': '#523749'
+    },
+    'describe': '送出入团卡',
+    'id': '3242',
+    'combo': True,
+    'type': 1,
+    'diamondCount': 1,
+    'name': '入团卡',
+    'icon': {
+      'urlListList': [
+        'http://p3-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png',
+        'http://p6-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png',
+        'http://p11-webcast.douyinpic.com/img/webcast/698373dfdac86a90b54facdc38698cbc~tplv-obj.png'
+      ],
+      'uri': 'webcast/698373dfdac86a90b54facdc38698cbc',
+      'avgColor': '#BCD9E0'
+    }
+  },
+  'publicAreaCommon': {},
+  'trayDisplayText': {
+    'key': 'webcast_aweme_tray_message_to_anchor',
+    'defaultPatter': '送{0}',
+    'defaultFormat': {
+      'color': '#B3FFFFFF',
+      'weight': 400,
+      'useRemoteClor': True
+    },
+    'piecesList': [
+      {
+        'type': True,
+        'format': {
+          'color': '#B3FFFFFF',
+          'weight': 400,
+          'useRemoteClor': True
+        }
+      }
+    ]
+  },
+  'bannedDisplayEffects': '3',
+  'clientGiftSource': 1,
+  'traceId': '666666_1_98039178148_1135172434265197_20230927'
+}

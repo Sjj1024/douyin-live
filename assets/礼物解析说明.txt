@@ -1,4 +1,5 @@
 字段说明
+送礼物的人：user.nickName
 礼物名称：gift.name
 礼物价值(毛|抖币)：gift.diamondCount
 礼物数量：totalCount

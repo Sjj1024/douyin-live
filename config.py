@@ -21,7 +21,7 @@ LIVE_HTTP_SEND = True
 # 多久向服务端推送一条消息
 LIVE_SEND_INTERVAL = 3
 # HTTP推送地址
-LIVE_WEB_SEND_URL = "*******"
+LIVE_WEB_SEND_URL = "*********"
 # 一场比赛唯一的UUID
 GAME_UUID = "157ae45b-263b-414a-8976-6d2ad210a7e8"
 # 应援UUID(这是我们自己项目推送使用的参数)

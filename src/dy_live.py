@@ -171,9 +171,9 @@ def unPackWebcastGiftMessage(data):
         gift_name = data.get("gift").get("name")
         nick_name = data.get("user").get("nickName")
         # 对特殊礼物单独统计
-        if gift_name in LIVE_GIFT_LIST:
+        if gift_name in LIVE_GIFT_LIST and nick_name not in GlobalVal.gift_list:
             logger.info(f"抓到特殊礼物了: {gift_name}，用户名：{nick_name}")
-            GlobalVal.gift_list.append(f"0-{nick_name}")
+            GlobalVal.gift_list.append(f"{nick_name}")
         # 特殊礼物价值依然统计
         GlobalVal.gift_num += int(data.get("totalCount", 1))
         GlobalVal.gift_value += (int(data["gift"]["diamondCount"]) * int(data.get("totalCount", 1)))
