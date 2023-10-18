@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .main {
+                text-align: center;
+            }
+
+            .reset {
+                display: block;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div>
+                用Canvas实现图片轮播抽奖效果:
+                轮播速度由慢到快，然后再到慢，最后锁定到中奖目标
+            </div>
+            <canvas id="myCanvas" width="425" height="645"></canvas>
+            <button class="reset" id="reset">重新抽奖</button>
+        </div>
+        <script>
+            // 获取画布
+            var canvas = document.getElementById('myCanvas')
+
+            // 获取画笔
+            var context = canvas.getContext('2d')
+            // 画线的时候要有起点和终点
+            // const img = new Image()
+            let imgSrc = [
+                'https://img-blog.csdnimg.cn/67fc9799ae8e48749e82cf70b179895b.png',
+                'https://img-blog.csdnimg.cn/a5e05258931d480c8f9b3c1f7d5690a0.png',
+                'https://img-blog.csdnimg.cn/7eeba09bd6b54ea098835c84f648ec72.png',
+                'https://img-blog.csdnimg.cn/ba8cec54e8fc4e0193c100470b1eb24d.png',
+                'https://img-blog.csdnimg.cn/88ee56abdc354af79e60b34a6cba9562.png',
+                'https://img-blog.csdnimg.cn/2e23029912544b18ae4559ebdbfa37ff.png',
+                'https://img-blog.csdnimg.cn/0c2caec87e4a46b788f9bc986a2ba290.png',
+                'https://img-blog.csdnimg.cn/cdcfbb8ddcef4b9f8e1c000958cf1e17.png',
+                'https://img-blog.csdnimg.cn/5cc7fdc62c01432299089f008c48ca4d.png',
+            ]
+            let imgObj = []
+            let count = 0
+            imgSrc.forEach((imgItem) => {
+                let myImg = new Image()
+                myImg.src = imgItem
+                myImg.onload = () => {
+                    count++
+                    console.log('图片加载完成')
+                    imgObj.push(myImg)
+                    if (count === imgSrc.length) {
+                        // 开始调用绘制图片的函数
+                        startDraw()
+                    }
+                }
+            })
+
+            // 开始绘制图片
+            let cur = 1
+            let timer = -1
+            // 相当于抛物线的最高点
+            const maxVal = 12500
+            // 触发绘制的概率
+            const drawFlag = () => {
+                const y = -5 * cur * cur + 500 * cur
+                const random = Math.round(Math.random() * 5601)
+                console.log('二次方程函数和随机数:', y, random)
+                if (y === 0) {
+                    console.log('清除定时器')
+                    clearInterval(timer)
+                    // 同时设置最后一张中奖图片
+                    // const target = new Image()
+                    // target.src =
+                    //     'https://img-blog.csdnimg.cn/2e23029912544b18ae4559ebdbfa37ff.png'
+                    // target.onload = () => {
+                    //     context.drawImage(
+                    //         target,
+                    //         0,
+                    //         0,
+                    //         canvas.clientWidth,
+                    //         canvas.clientHeight
+                    //     )
+                    // }
+                }
+                if (random <= y) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            const startDraw = () => {
+                console.log('开始绘制图片')
+                let index = 0
+                timer = setInterval(() => {
+                    if (index >= imgObj.length) {
+                        index = 0
+                    }
+                    console.log('绘制的图片索引是:', index)
+                    if (drawFlag()) {
+                        context.drawImage(
+                            imgObj[index],
+                            0,
+                            0,
+                            canvas.clientWidth,
+                            canvas.clientHeight
+                        )
+                        cur++
+                        index++
+                    }
+                }, 100)
+            }
+
+            const reset = document.querySelector('#reset')
+            reset.onclick = () => {
+                console.log('重新开始抽奖')
+                cur = 1
+                startDraw()
+            }
+        </script>
+    </body>
+</html>
