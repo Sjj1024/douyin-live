@@ -52,6 +52,8 @@ DONATION_UUID = "73ba8e83-e32d-4ef0-8eca-5877a4f5fab4"
 直播流地址可以使用在线播放工具测试是否可以正常播放直播内容  
 西瓜播放器(支持flv直播流)：https://h5player.bytedance.com/generate/  
 m3u8在线播放器(播放m3u8流)：http://tool.pfan.cn/m3u8/  
+![](https://jsd.cdn.zzko.cn/gh/Sjj1024/FileHub@main/root/picture/347be116db2fd264cc2fa218b8b817d.png)
+![](https://jsd.cdn.zzko.cn/gh/Sjj1024/FileHub@main/root/picture/4de397544aa0da3326d515a9bd33f8c.png)
 
 ## TODO BUG
 
