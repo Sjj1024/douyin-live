@@ -26,13 +26,14 @@ def get_rank(room_id):
     rank_list = response.json()
     # logger.info(f"[liveRankList] 直播间在线观众排名: {rank_list}")
     # 获取前三名然后只要昵称数据和排名
-    ranks_list = rank_list.get("data").get("ranks")[:3]
+    ranks_list = rank_list.get("data").get("ranks")[:4]
     ranks_three = []
     for rank in ranks_list:
         ranks_three.append({
             "nickname": rank.get("user").get("nickname"),
             "rank": rank.get("rank")
         })
+    # 判断是否存在排名，不存在就是空
     GlobalVal.rank_user = ranks_three
     logger.info(f"更新打赏排行: {ranks_three}")
     print(f"更新打赏排行: {ranks_three}")
@@ -40,7 +41,10 @@ def get_rank(room_id):
 
 def handle_rank(roo_id, delay):
     while True:
-        get_rank(roo_id)
+        try:
+            get_rank(roo_id)
+        except Exception as e:
+            print(f"推送打赏排名出错:{e}")
         time.sleep(delay)
 
 

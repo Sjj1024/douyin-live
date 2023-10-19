@@ -171,7 +171,7 @@ def unPackWebcastGiftMessage(data):
         gift_name = data.get("gift").get("name")
         nick_name = data.get("user").get("nickName")
         # 对特殊礼物单独统计
-        if gift_name in LIVE_GIFT_LIST and nick_name not in GlobalVal.gift_list:
+        if gift_name in LIVE_GIFT_LIST:
             logger.info(f"抓到特殊礼物了: {gift_name}，用户名：{nick_name}")
             GlobalVal.gift_list.append(f"{nick_name}")
         # 特殊礼物价值依然统计
@@ -318,12 +318,14 @@ def parseLiveRoomUrl(url):
     if not res_m3u8_hd1:
         res_m3u8_hd1 = res_m3u8_hd1.get("HD1", "").replace("http", "https")
     logger.info(f"直播流m3u8链接地址是: {res_m3u8_hd1}")
+    print(f"直播流m3u8链接地址是: {res_m3u8_hd1}")
     # 找到flv直播流地址:区分标清|高清|蓝光
     res_flv_search = re.search(r'flv\\":\\"(.*?)\\"', res)
     res_stream_flv = res_flv_search.group(1).replace('\\"', '"').replace("\\\\u0026", "&")
     if "https" not in res_stream_flv:
         res_stream_flv = res_stream_flv.replace("http", "https")
     logger.info(f"直播流FLV地址是: {res_stream_flv}")
+    print(f"直播流FLV地址是: {res_stream_flv}")
     # 开始获取直播间排行
     live_rank.interval_rank(liveRoomId)
     # 创建websocket客户端，并开始监听消息
