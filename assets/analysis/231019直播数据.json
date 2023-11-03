@@ -1,0 +1,83 @@
+{
+  "request_method": "POST",
+  "request_time": "2023-10-20 09:48:51",
+  "request_url": "/game/gamemgnt",
+  "response_data": {
+    "code": 200,
+    "data": [
+      {
+        "id": 4,
+        "uuid": "179019d3-83dd-4619-b7d9-579786659204",
+        "gameuuid": "157ae45b-263b-414a-8976-6d2ad210a7e8",
+        "teamuuid": "83c12c9b-08ef-47a7-b4fb-0464bb9394f4",
+        "donationdetail": "[{\"nickname\": \"\生\活\有\阳\光\", \"rank\": 1}, {\"nickname\": \"\蛋\挞\派\对\", \"rank\": 2}, {\"nickname\": \"\啃\大\瓜\", \"rank\": 3}, {\"nickname\": \"\�\�\米\粒\", \"rank\": 4}]",
+        "applypoint": 86424,
+        "popmsg": 404,
+        "giftlist": 168,
+        "totalyk": 15572,
+        "expensed": 15000,
+        "fannamelist": "抖音A队-巴利帕斯-豆子",
+        "fannamereadylist": "",
+        "skilllist": "-2-3-1-1-",
+        "status": 0,
+        "Addtime": "2023-09-28T12:38:03+08:00",
+        "Updated": "2023-10-19T21:59:57+08:00"
+      },
+      {
+        "id": 5,
+        "uuid": "a749cffa-510f-4b6b-a711-691040d69079",
+        "gameuuid": "157ae45b-263b-414a-8976-6d2ad210a7e8",
+        "teamuuid": "f5efb3ba-d9c3-4939-9cb7-7c39334430c9",
+        "donationdetail": "[{\"nickname\": \"J\＇AIME STUDIO\", \"rank\": 1}, {\"nickname\": \"\仙\女\和\她\的\猫\", \"rank\": 2}, {\"nickname\": \"\迪\莉\", \"rank\": 3}, {\"nickname\": \"\落\日\时\分1\", \"rank\": 4}]",
+        "applypoint": 167475,
+        "popmsg": 1401,
+        "giftlist": 11405,
+        "totalyk": 52806,
+        "expensed": 52000,
+        "fannamelist": "抖音B队-慕容菲儿-阿尼",
+        "fannamereadylist": "",
+        "skilllist": "-5-4-1-3-5AFF56C3F559444688D19D4D01627067",
+        "status": 0,
+        "Addtime": "2023-09-28T12:38:14+08:00",
+        "Updated": "2023-10-19T21:59:58+08:00"
+      },
+      {
+        "id": 6,
+        "uuid": "2b61e3af-c924-4252-98bb-2fbd40d660ec",
+        "gameuuid": "157ae45b-263b-414a-8976-6d2ad210a7e8",
+        "teamuuid": "7d91f700-a7b6-45ea-a82f-6f366b70bfca",
+        "donationdetail": "[{\"nickname\": \"\诗***\", \"rank\": 1}, {\"nickname\": \"\扬***\", \"rank\": 2}, {\"nickname\": \"\陈***\", \"rank\": 3}, {\"nickname\": \"\江***\", \"rank\": 4}]",
+        "applypoint": 28332,
+        "popmsg": 72,
+        "giftlist": 242,
+        "totalyk": 10314,
+        "expensed": 10000,
+        "fannamelist": "抖音C队-好吃鱼-haru",
+        "fannamereadylist": "",
+        "skilllist": "-3-1-1-1-undefined",
+        "status": 0,
+        "Addtime": "2023-09-28T12:38:26+08:00",
+        "Updated": "2023-10-19T21:59:57+08:00"
+      },
+      {
+        "id": 7,
+        "uuid": "8891ae02-81a5-4ede-821f-72eeaf114648",
+        "gameuuid": "157ae45b-263b-414a-8976-6d2ad210a7e8",
+        "teamuuid": "69ef8f25-7eb6-4e9f-9006-b53ea6637fb9",
+        "donationdetail": "[{\"nickname\": \"\憨\憨\的\小\皮\", \"rank\": 1}, {\"nickname\": \"\、\搁\浅\。\｀\", \"rank\": 2}, {\"nickname\": \"Conlin\", \"rank\": 3}, {\"nickname\": \"\妖\气\小\霸\王\", \"rank\": 4}]",
+        "applypoint": 80743,
+        "popmsg": 426,
+        "giftlist": 1795,
+        "totalyk": 17221,
+        "expensed": 15000,
+        "fannamelist": "抖音D队-悲伤壳马-未来",
+        "fannamereadylist": "",
+        "skilllist": "-3-2-1-1-",
+        "status": 0,
+        "Addtime": "2023-09-28T12:38:35+08:00",
+        "Updated": "2023-10-19T21:59:58+08:00"
+      }
+    ],
+    "msg": ""
+  }
+}
