@@ -1,7 +1,8 @@
 # 抖音直播爬虫 python 实现
 
 抖音弹幕抓取，礼物抓取，直播流地址抓取，可以抓取到m3u8直播流链接，还有flv直播流链接，还有直播礼物打赏排名，在线观众排名等等。  
-可配置服务端地址，将数据推送到自己的服务器，可以控制是否开启推送等配置。可以控制是否保存lOG文件等配置
+可配置服务端地址，将数据推送到自己的服务器，可以控制是否开启推送等配置。可以控制是否保存lOG文件等配置。  
+欢迎参观我的个人博客：[我的CSDN博客，阅读量过260W，粉丝过2W](https://blog.csdn.net/weixin_44786530?spm=1000.2115.3001.5343)
 
 ## 环境大于3.6应该都可以
 
@@ -15,10 +16,12 @@ python 3.9
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 ```
 
-## 生成Proto文件  
+## 生成Proto文件
+
 ```
 protoc -I . --python_out=. ./proto/dy.proto
 ```
+
 此时会在proto文件夹中重新生成dy_pb2.py文件，mac电脑一定要这样做，windows也尽量这样生成一下，避免程序启动失败。
 
 ## 运行
@@ -31,6 +34,7 @@ python main.py
 ```
 
 ## 动态配置
+
 ```python
 # 配置日志信息
 LOG_FILE_SAVE = False
