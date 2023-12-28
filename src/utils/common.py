@@ -13,6 +13,8 @@ class GlobalVal(object):
     gift_value = 0
     # 特殊礼物：月下瀑布
     gift_list = []
+    # 礼物id列表：礼物去重使用，因为有送一个礼物，但是抖音监听到两个礼物的情况
+    gift_id_list = []
     # 记录直播间人数
     member_num = 0
     # 在线观众排名

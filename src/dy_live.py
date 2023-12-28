@@ -170,10 +170,13 @@ def unPackWebcastGiftMessage(data):
     try:
         gift_name = data.get("gift").get("name")
         nick_name = data.get("user").get("nickName")
+        # 抖音礼物唯一标识
+        gift_traceId = data.get("traceId")
         # 对特殊礼物单独统计
-        if gift_name in LIVE_GIFT_LIST:
+        if gift_name in LIVE_GIFT_LIST and gift_traceId not in GlobalVal.gift_id_list:
             logger.info(f"抓到特殊礼物了: {gift_name}，用户名：{nick_name}")
             GlobalVal.gift_list.append(f"{nick_name}")
+            GlobalVal.gift_id_list.append(gift_traceId)
         # 特殊礼物价值依然统计
         GlobalVal.gift_num += int(data.get("totalCount", 1))
         GlobalVal.gift_value += (int(data["gift"]["diamondCount"]) * int(data.get("totalCount", 1)))
