@@ -26,7 +26,7 @@ protoc -I . --python_out=. ./proto/dy.proto
 
 ## 运行
 
-然后打开浏览器，打开抖音直播，然后将直播地址黏贴到main.py中，然后运行程序即可看到效果。
+然后打开浏览器，打开抖音直播，然后将直播地址黏贴到config.py的LIVE_ROOM_URL中，然后运行main.py程序即可看到效果。
 注意：如果要获取排名，需要将时间间隔设置大一点，否则抓取频繁会获取不到数据：打包房间人数失败
 
 ```shell
@@ -43,7 +43,7 @@ LOG_LEVEL = ""
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 
 # 直播信息配置：直播地址，直播用户排名，直播排名抓取间隔，直播推送到后台，推送到后台地址
-LIVE_ROOM_URL = ""
+LIVE_ROOM_URL = "直播间地址"
 LIVE_RANK_LIST = True
 # 获取礼物排名时间间隔
 LIVE_RANK_INTERVAL = 5
