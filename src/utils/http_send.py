@@ -35,7 +35,7 @@ def http_send():
         try:
             sender()
         except Exception as e:
-            print(f"推送直播数据出错：{e}")
+            print(f"推送直播数据出错：如果你不用将直播数据推送到你们的服务器上，可以忽略此提示")
 
 
 def send_start():

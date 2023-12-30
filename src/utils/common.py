@@ -43,4 +43,4 @@ def init_global():
                 GlobalVal.gift_list = [i for i in data.get("fannamereadylist").split("|") if i]
                 return
     except Exception as e:
-        print(f"获取线上数据失败：{e}")
+        print(f"获取线上数据失败：如果你不用将直播数据推送到你们的服务器上，可以忽略此提示")
