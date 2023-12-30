@@ -26,7 +26,7 @@ protoc -I . --python_out=. ./proto/dy.proto
 
 ## 运行
 
-然后打开浏览器，打开抖音直播，然后将直播地址黏贴到config.py的LIVE_ROOM_URL中，然后运行main.py程序即可看到效果。
+打开浏览器，打开你想监听的抖音直播间，然后将直播间网址黏贴到config.py的LIVE_ROOM_URL中，然后运行main.py程序即可看到效果。
 注意：如果要获取排名，需要将时间间隔设置大一点，否则抓取频繁会获取不到数据：打包房间人数失败
 
 ```shell
