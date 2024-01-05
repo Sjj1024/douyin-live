@@ -18,6 +18,8 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 
 ## 生成Proto文件
 
+(proto是需要单独安装的一个工具哦，mac电脑应该是必须执行这条命令才可以，windows的应该可以直接用)
+
 ```
 protoc -I . --python_out=. ./proto/dy.proto
 ```
