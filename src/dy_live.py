@@ -308,10 +308,18 @@ def parseLiveRoomUrl(url):
     data = res.cookies.get_dict()
     ttwid = data['ttwid']
     res = res.text
+    res_room_info = re.search(r'room\\":{.*\\"id_str\\":\\"(\d+)\\".*,\\"status\\":(\d+).*"title\\":\\"([^"]*)\\"', res)
+    if res_room_info:
+        room_id_str = res_room_info.group(1)
+        room_status = res_room_info.group(2)
+        room_title = res_room_info.group(3)
+        liveRoomTitle = room_title
+        logger.info(f"房间标题: {liveRoomTitle}")
+        if room_status == '4':
+            raise ConnectionError("直播已结束")
     res_room = re.search(r'roomId\\":\\"(\d+)\\"', res)
     # 获取直播主播的uid和昵称等信息
     live_room_search = re.search(r'owner\\":(.*?),\\"room_auth', res)
-    # 如果没有获取到live_room信息，很有可能是直播已经关闭了，待优化
     live_room_res = live_room_search.group(1).replace('\\"', '"')
     live_room_info = json.loads(live_room_res)
     logger.info(f"主播账号信息: {live_room_info}")
