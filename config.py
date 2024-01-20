@@ -1,13 +1,13 @@
 import logging
 
 # 配置日志信息
-LOG_FILE_SAVE = False
+LOG_FILE_SAVE = True
 LOG_FILE_NAME = "log.txt"
 LOG_LEVEL = logging.DEBUG
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 
 # 直播信息配置：直播地址，直播用户排名，直播排名抓取间隔，直播推送到后台，推送到后台地址
-LIVE_ROOM_URL = "https://live.douyin.com/5893162289"
+LIVE_ROOM_URL = "https://live.douyin.com/639709145929"
 # 特殊礼物单独统计
 LIVE_GIFT_LIST = ["月下瀑布"]
 # 是否抓取在线打赏排名
