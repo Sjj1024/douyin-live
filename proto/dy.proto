@@ -19,14 +19,14 @@ message Response {
 }
 
 message Message{
-    string method = 1;
-    bytes payload = 2;
-    int64 msgId = 3;
-    int32 msgType = 4;
-    int64 offset = 5;
-    bool needWrdsStore = 6;
-    int64 wrdsVersion = 7;
-    string wrdsSubKey = 8;
+  string method = 1;
+  bytes payload = 2;
+  int64 msgId = 3;
+  int32 msgType = 4;
+  int64 offset = 5;
+  bool needWrdsStore = 6;
+  int64 wrdsVersion = 7;
+  string wrdsSubKey = 8;
 }
 
 // 聊天
@@ -47,8 +47,8 @@ message ChatMessage {
   bool sendReview = 16;
   bool fromIntercom = 17;
   bool intercomHideUserCard = 18;
-//  repeated chatTagsList = 19;
-  string chatBy  = 20;
+  //  repeated chatTagsList = 19;
+  string chatBy = 20;
   uint32 individualChatPriority = 21;
   Text rtfContent = 22;
 }
@@ -95,8 +95,8 @@ message UpdateFanTicketMessage {
 message RoomUserSeqMessageContributor {
   uint64 score = 1;
   User user = 2;
-  uint64 rank  = 3;
-  uint64 delta  = 4;
+  uint64 rank = 3;
+  uint64 delta = 4;
   bool isHidden = 5;
   string scoreDescription = 6;
   string exactlyScore = 7;
@@ -124,15 +124,15 @@ message GiftMessage {
   PublicAreaCommon publicAreaCommon = 18;
   Text trayDisplayText = 19;
   uint64 bannedDisplayEffects = 20;
-//  GiftTrayInfo trayInfo = 21;
-//  AssetEffectMixInfo assetEffectMixInfo = 22;
+  //  GiftTrayInfo trayInfo = 21;
+  //  AssetEffectMixInfo assetEffectMixInfo = 22;
   bool displayForSelf = 25;
   string interactGiftInfo = 26;
   string diyItemInfo = 27;
   repeated uint64 minAssetSetList = 28;
   uint64 totalCount = 29;
   uint32 clientGiftSource = 30;
-//  AnchorGiftData anchorGift = 31;
+  //  AnchorGiftData anchorGift = 31;
   repeated uint64 toUserIdsList = 32;
   uint64 sendTime = 33;
   uint64 forceDisplayEffects = 34;
@@ -146,7 +146,7 @@ message GiftStruct {
   bool notify = 3;
   uint64 duration = 4;
   uint64 id = 5;
-//  GiftStructFansClubInfo fansclubInfo = 6;
+  //  GiftStructFansClubInfo fansclubInfo = 6;
   bool forLinkmic = 7;
   bool doodle = 8;
   bool forFansclub = 9;
@@ -168,9 +168,9 @@ message GiftStruct {
 }
 
 message GiftIMPriority {
-    repeated uint64 queueSizesList = 1;
-    uint64 selfQueuePriority = 2;
-    uint64 priority = 3;
+  repeated uint64 queueSizesList = 1;
+  uint64 selfQueuePriority = 2;
+  uint64 priority = 3;
 }
 
 message TextEffect {
@@ -244,7 +244,7 @@ message EffectConfig {
   repeated uint64 textFlexSettingArrayList = 13;
   uint64 centerAnimAssetId = 14;
   Image dynamicImage = 15;
-  map<string,string> extraMap = 16;
+  map<string, string> extraMap = 16;
   uint64 mp4AnimAssetId = 17;
   uint64 priority = 18;
   uint64 maxWaitTime = 19;
@@ -328,6 +328,19 @@ message LikeMessage {
 
 }
 
+
+// WebcastEmojiChatMessage
+message EmojiChatMessage {
+  Common common = 1;
+  User   user = 2;
+  int64 emojiId = 3;
+  Text  emojiContent = 4;
+  string defaultContent = 5;
+  Image    backgroundImage = 6;
+  bool  fromIntercom = 7;
+  bool   intercomHideUserCard = 8;
+}
+
 message SocialMessage {
   Common common = 1;
   User user = 2;
@@ -358,15 +371,15 @@ message DisplayControlInfo {
 }
 
 message EpisodeChatMessage {
-   Message common = 1;
-   User user = 2;
-   string content = 3;
-   bool visibleToSende = 4;
-//   BackgroundImage backgroundImage = 5;
-//   PublicAreaCommon publicAreaCommon = 6;
-   Image giftImage = 7;
-   uint64 agreeMsgId = 8;
-   repeated string colorValueList = 9;
+  Message common = 1;
+  User user = 2;
+  string content = 3;
+  bool visibleToSende = 4;
+  //   BackgroundImage backgroundImage = 5;
+  //   PublicAreaCommon publicAreaCommon = 6;
+  Image giftImage = 7;
+  uint64 agreeMsgId = 8;
+  repeated string colorValueList = 9;
 }
 
 
@@ -381,22 +394,22 @@ message Against {
   string leftName = 1;
   Image leftLogo = 2;
   string leftGoal = 3;
-//  LeftPlayersList leftPlayersList = 4;
-//  LeftGoalStageDetail leftGoalStageDetail = 5;
+  //  LeftPlayersList leftPlayersList = 4;
+  //  LeftGoalStageDetail leftGoalStageDetail = 5;
   string rightName = 6;
   Image rightLogo = 7;
   string rightGoal = 8;
-//  RightPlayersList rightPlayersList  = 9;
-//  RightGoalStageDetail rightGoalStageDetail = 10;
+  //  RightPlayersList rightPlayersList  = 9;
+  //  RightGoalStageDetail rightGoalStageDetail = 10;
   uint64 timestamp = 11;
   uint64 version = 12;
   uint64 leftTeamId = 13;
   uint64 rightTeamId = 14;
   uint64 diffSei2absSecond = 15;
   uint32 finalGoalStage = 16;
-  uint32 currentGoalStage  =17;
-  uint32 leftScoreAddition  =18;
-  uint32 rightScoreAddition  =19;
+  uint32 currentGoalStage = 17;
+  uint32 leftScoreAddition = 18;
+  uint32 rightScoreAddition = 19;
   uint64 leftGoalInt = 20;
   uint64 rightGoalInt = 21;
 }
@@ -409,7 +422,7 @@ message Common {
   uint32 monitor = 5;
   bool isShowMsg = 6;
   string describe = 7;
-//  DisplayText displayText = 8;
+  //  DisplayText displayText = 8;
   uint64 foldType = 9;
   uint64 anchorFoldType = 10;
   uint64 priorityScore = 11;
@@ -417,10 +430,10 @@ message Common {
   string msgProcessFilterK = 13;
   string msgProcessFilterV = 14;
   User user = 15;
-//  Room room = 16;
-  uint64 anchorFoldTypeV2  = 17;
-  uint64 processAtSeiTimeMs  = 18;
-  uint64 randomDispatchMs  = 19;
+  //  Room room = 16;
+  uint64 anchorFoldTypeV2 = 17;
+  uint64 processAtSeiTimeMs = 18;
+  uint64 randomDispatchMs = 19;
   bool isDispatch = 20;
   uint64 channelId = 21;
   uint64 diffSei2absSecond = 22;
@@ -450,9 +463,9 @@ message User {
   uint32 IncomeSharePercent = 20;
   repeated Image BadgeImageList = 21;
   FollowInfo FollowInfo = 22;
-//  PayGrade PayGrade = 23;
-//  FansClub FansClub = 24;
-//  Border Border = 25;
+  //  PayGrade PayGrade = 23;
+  //  FansClub FansClub = 24;
+  //  Border Border = 25;
   string SpecialId = 26;
   Image AvatarBorder = 27;
   Image Medal = 28;
@@ -512,7 +525,7 @@ message PushFrame {
 }
 
 message kk {
-  uint32 k=14;
+  uint32 k = 14;
 }
 
 message SendMessageBody {

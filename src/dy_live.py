@@ -4,8 +4,6 @@ import gzip
 import json
 import os
 import signal
-import sys
-
 from config import LIVE_GIFT_LIST
 from src.utils.logger import logger
 import re
@@ -17,18 +15,7 @@ from src import live_rank
 from src.utils.common import GlobalVal
 from protobuf_inspector.types import StandardParser
 from google.protobuf import json_format
-from proto.dy_pb2 import PushFrame
-from proto.dy_pb2 import Response
-from proto.dy_pb2 import MatchAgainstScoreMessage
-from proto.dy_pb2 import LikeMessage
-from proto.dy_pb2 import MemberMessage
-from proto.dy_pb2 import GiftMessage
-from proto.dy_pb2 import ChatMessage
-from proto.dy_pb2 import SocialMessage
-from proto.dy_pb2 import RoomUserSeqMessage
-from proto.dy_pb2 import UpdateFanTicketMessage
-from proto.dy_pb2 import CommonTextMessage
-from proto.dy_pb2 import ProductChangeMessage
+from proto.dy_pb2 import *
 
 # 直播信息全局变量
 liveRoomId = ""
@@ -103,6 +90,12 @@ def onMessage(ws: websocket.WebSocketApp, message: bytes):
         if msg.method == 'WebcastProductChangeMessage':
             WebcastProductChangeMessage(msg.payload)
             continue
+
+        # WebcastEmojiChatMessage
+        if msg.method == 'WebcastEmojiChatMessage':
+            WebcastEmojiChatMessage(msg.payload)
+            continue
+
         logger.info('[onMessage] [待解析方法' + msg.method + '等待解析～] [房间Id：' + liveRoomId + ']')
 
 
@@ -121,6 +114,15 @@ def WebcastProductChangeMessage(data):
     data = json_format.MessageToDict(commonTextMessage, preserving_proto_field_name=True)
     log = json.dumps(data, ensure_ascii=False)
     logger.info('[WebcastProductChangeMessage] [] [房间Id：' + liveRoomId + '] | ' + log)
+
+
+# WebcastEmojiChatMessage
+def WebcastEmojiChatMessage(data):
+    commonTextMessage = EmojiChatMessage()
+    commonTextMessage.ParseFromString(data)
+    data = json_format.MessageToDict(commonTextMessage, preserving_proto_field_name=True)
+    log = json.dumps(data, ensure_ascii=False)
+    logger.info('[WebcastEmojiChatMessage] [] [房间Id：' + liveRoomId + '] | ' + log)
 
 
 def unPackWebcastUpdateFanTicketMessage(data):
