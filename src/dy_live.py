@@ -4,15 +4,13 @@ import gzip
 import json
 import os
 import signal
-import sys
-
 from config import LIVE_GIFT_LIST
 from src.utils.logger import logger
 import re
 import time
 import requests
 import websocket
-from src.utils.ws_send import ws_send, ws_sender
+from src.utils.ws_send import ws_sender
 from src import live_rank
 from src.utils.common import GlobalVal
 from protobuf_inspector.types import StandardParser
