@@ -308,7 +308,6 @@ def parseLiveRoomUrl(url):
     res = res.text
     res_room_info = re.search(r'room\\":{.*\\"id_str\\":\\"(\d+)\\".*,\\"status\\":(\d+).*"title\\":\\"([^"]*)\\"', res)
     if res_room_info:
-        room_id_str = res_room_info.group(1)
         room_status = res_room_info.group(2)
         room_title = res_room_info.group(3)
         liveRoomTitle = room_title
