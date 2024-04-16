@@ -1,0 +1,79 @@
+{
+  "common": {
+    "method": "WebcastEmojiChatMessage",
+    "msgId": "7357723593377813531",
+    "roomId": "7357693642707913484",
+    "isShowMsg": true,
+    "priorityScore": "31000"
+  },
+  "user": {
+    "id": "3699224218705294",
+    "shortId": "95109585355",
+    "nickName": "南🌟",
+    "AvatarThumb": {
+      "urlListList": [
+        "https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_oMA8gHEgCPAfBhjdA4etDCNzAqzSACAIxAQzNU.jpeg?from=3067671334"
+      ]
+    },
+    "BadgeImageList": [
+      {
+        "urlListList": [
+          "http://p3-webcast.douyinpic.com/img/webcast/webcast_admin_badge.png~tplv-obj.image"
+        ],
+        "height": "16",
+        "width": "16",
+        "imageType": 3,
+        "content": {
+          "alternativeText": "房管勋章"
+        }
+      },
+      {
+        "urlListList": [
+          "http://p11-webcast.douyinpic.com/img/webcast/new_user_grade_level_v1_26.png~tplv-obj.image"
+        ],
+        "height": "16",
+        "width": "32",
+        "imageType": 1,
+        "content": {
+          "level": "26",
+          "alternativeText": "荣誉等级26级勋章"
+        }
+      },
+      {
+        "urlListList": [
+          "http://p3-webcast.douyinpic.com/img/webcast/fansclub_level_v6_10.png~tplv-obj.image"
+        ],
+        "imageType": 7,
+        "content": {
+          "name": "颗奶糖",
+          "fontColor": "#FFFFFF",
+          "level": "10",
+          "alternativeText": "颗奶糖粉丝团勋章"
+        }
+      }
+    ],
+    "FollowInfo": {
+      "followingCount": "20",
+      "followerCount": "16",
+      "followStatus": "2",
+      "followerCountStr": "0",
+      "followingCountStr": "0"
+    },
+    "displayId": "Hlike_6",
+    "secUid": "MS4wLjABAAAAVJEnN_iYoOzV7J9Zb-XmuITdiICKhp5Ipv927DlOKM1NgEcmGL297yeYB4P1hegZ"
+  },
+  "emojiContent": {
+    "key": "emoji_chat_default",
+    "defaultPatter": "{0:image}",
+    "defaultFormat": {
+      "color": "#ffffffff",
+      "weight": 400
+    },
+    "piecesList": [
+      {
+        "type": true
+      }
+    ]
+  },
+  "defaultContent": "[表情]"
+}
