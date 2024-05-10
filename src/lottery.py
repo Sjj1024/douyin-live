@@ -1,12 +1,9 @@
 import re
 import json
-from datetime import datetime
-
 import requests
 
 
 def get_room_id(url: str):
-    # print("get room id")
     headers = {
         'authority': 'live.douyin.com',
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -43,7 +40,6 @@ def get_conditions_info(conditions: list):
 
 
 def get_lottery_info(room_id):
-    # print("get lottery info")
     url = f"https://live.douyin.com/webcast/lottery/melon/lottery_info/?aid=6383&app_name=douyin_web&live_id=1&device_platform=web&language=zh-CN&enter_from=page_refresh&cookie_enabled=true&screen_width=1512&screen_height=982&browser_language=zh-CN&browser_platform=MacIntel&browser_name=Chrome&browser_version=124.0.0.0&room_id={room_id}&query_from=1&msToken=5c3e_hFFyFYFYmJCaVuvPXCOPorD-Wi7azk5ZHBUdBGZV7UP038be6fWlKsN8n1vXL_hJk9mhzcKK-Lfu2IO46tIYfvvBuZqd5qXZpMduUpG8XJ6ROC9WteZyW2K"
     headers = {
         'accept': 'application/json, text/plain, */*',
@@ -94,11 +90,10 @@ def get_lottery_info(room_id):
 
 
 def main(url: str):
-    # print("run main")
     room_id = get_room_id(url)
     get_lottery_info(room_id)
 
 
 if __name__ == '__main__':
-    live_url = "https://live.douyin.com/741491811862"
+    live_url = "https://live.douyin.com/770534886161"
     main(live_url)
