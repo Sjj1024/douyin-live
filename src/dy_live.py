@@ -53,55 +53,56 @@ def onMessage(ws: websocket.WebSocketApp, message: bytes):
         sendAck(ws, logId, payloadPackage.internalExt)
     for msg in payloadPackage.messagesList:
         # 反对分数消息
-        if msg.method == 'WebcastMatchAgainstScoreMessage':
-            unPackMatchAgainstScoreMessage(msg.payload)
-            continue
-
-        # 点赞数
-        if msg.method == 'WebcastLikeMessage':
-            unPackWebcastLikeMessage(msg.payload)
-            continue
-
-        # 成员进入直播间消息
-        if msg.method == 'WebcastMemberMessage':
-            unPackWebcastMemberMessage(msg.payload)
-            continue
-
-        # 礼物消息
-        if msg.method == 'WebcastGiftMessage':
-            unPackWebcastGiftMessage(msg.payload)
-            continue
+        # if msg.method == 'WebcastMatchAgainstScoreMessage':
+        #     unPackMatchAgainstScoreMessage(msg.payload)
+        #     continue
+        #
+        # # 点赞数
+        # if msg.method == 'WebcastLikeMessage':
+        #     unPackWebcastLikeMessage(msg.payload)
+        #     continue
+        #
+        # # 成员进入直播间消息
+        # if msg.method == 'WebcastMemberMessage':
+        #     unPackWebcastMemberMessage(msg.payload)
+        #     continue
+        #
+        # # 礼物消息
+        # if msg.method == 'WebcastGiftMessage':
+        #     unPackWebcastGiftMessage(msg.payload)
+        #     continue
 
         # 聊天消息
         if msg.method == 'WebcastChatMessage':
             unPackWebcastChatMessage(msg.payload)
             continue
 
-        # 联谊会消息
-        if msg.method == 'WebcastSocialMessage':
-            unPackWebcastSocialMessage(msg.payload)
-            continue
-
-        # 房间用户发送消息
-        if msg.method == 'WebcastRoomUserSeqMessage':
-            unPackWebcastRoomUserSeqMessage(msg.payload)
-            continue
-
-        # 更新粉丝票
-        if msg.method == 'WebcastUpdateFanTicketMessage':
-            unPackWebcastUpdateFanTicketMessage(msg.payload)
-            continue
-
-        # 公共文本消息
-        if msg.method == 'WebcastCommonTextMessage':
-            unPackWebcastCommonTextMessage(msg.payload)
-            continue
-
-        # 商品改变消息
-        if msg.method == 'WebcastProductChangeMessage':
-            WebcastProductChangeMessage(msg.payload)
-            continue
-        logger.info('[onMessage] [待解析方法' + msg.method + '等待解析～] [房间Id：' + liveRoomId + ']')
+        # # 联谊会消息
+        # if msg.method == 'WebcastSocialMessage':
+        #     unPackWebcastSocialMessage(msg.payload)
+        #     continue
+        #
+        # # 房间用户发送消息
+        # if msg.method == 'WebcastRoomUserSeqMessage':
+        #     unPackWebcastRoomUserSeqMessage(msg.payload)
+        #     continue
+        #
+        # # 更新粉丝票
+        # if msg.method == 'WebcastUpdateFanTicketMessage':
+        #     unPackWebcastUpdateFanTicketMessage(msg.payload)
+        #     continue
+        #
+        # # 公共文本消息
+        # if msg.method == 'WebcastCommonTextMessage':
+        #     unPackWebcastCommonTextMessage(msg.payload)
+        #     continue
+        #
+        # # 商品改变消息
+        # if msg.method == 'WebcastProductChangeMessage':
+        #     WebcastProductChangeMessage(msg.payload)
+        #     continue
+        # logger.info('[onMessage] [待解析方法' + msg.method + '等待解析～] [房间Id：' + liveRoomId + ']')
+        #
 
 
 def unPackWebcastCommonTextMessage(data):
@@ -155,8 +156,10 @@ def unPackWebcastChatMessage(data):
     chatMessage.ParseFromString(data)
     data = json_format.MessageToDict(chatMessage, preserving_proto_field_name=True)
     log = json.dumps(data, ensure_ascii=False)
-    logger.info(
-        f'[unPackWebcastChatMessage] [直播间弹幕消息{GlobalVal.commit_num}] [房间Id：' + liveRoomId + '] | ' + log)
+    # userName, content
+    user_name = data.get("user").get("nickName")
+    content = data.get("content")
+    logger.info(f"用户昵称：【{user_name}】 发送的消息: {content}")
     return data
 
 
@@ -231,7 +234,7 @@ def sendAck(ws, logId, internalExt):
     obj.payloadType = internalExt
     data = obj.SerializeToString()
     ws.send(data, websocket.ABNF.OPCODE_BINARY)
-    logger.info('[sendAck] [🌟发送Ack] [房间Id：' + liveRoomId + '] ====> 房间标题【' + liveRoomTitle + '】')
+    # logger.info('[sendAck] [🌟发送Ack] [房间Id：' + liveRoomId + '] ====> 房间标题【' + liveRoomTitle + '】')
 
 
 def onError(ws, error):

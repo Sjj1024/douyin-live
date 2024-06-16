@@ -1,0 +1,62 @@
+{
+  'common': {
+    'method': 'WebcastChatMessage',
+    'msgId': '7381085664035034153',
+    'roomId': '7381052814048414502',
+    'isShowMsg': True,
+    'priorityScore': '31000'
+  },
+  'user': {
+    'id': '1060347003013640',
+    'shortId': '60596258404',
+    'nickName': '1……',
+    'AvatarThumb': {
+      'urlListList': [
+        'https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_c5b0747ae7566ff274a6e49208205a3b.jpeg?from=3067671334'
+      ]
+    },
+    'BadgeImageList': [
+      {
+        'urlListList': [
+          'http://p11-webcast.douyinpic.com/img/webcast/new_user_grade_level_v1_3.png~tplv-obj.image'
+        ],
+        'height': '16',
+        'width': '32',
+        'imageType': 1,
+        'content': {
+          'level': '3',
+          'alternativeText': '荣誉等级3级勋章'
+        }
+      },
+      {
+        'urlListList': [
+          'http://p3-webcast.douyinpic.com/img/webcast/fansclub_level_v6_9.png~tplv-obj.image'
+        ],
+        'imageType': 7,
+        'content': {
+          'name': '浅陌',
+          'fontColor': '#FFFFFF',
+          'level': '9',
+          'alternativeText': '浅陌粉丝团勋章'
+        }
+      }
+    ],
+    'FollowInfo': {
+      'followingCount': '32',
+      'followerCount': '45',
+      'followStatus': '1',
+      'followerCountStr': '0',
+      'followingCountStr': '0'
+    },
+    'displayId': '60596258404',
+    'secUid': 'MS4wLjABAAAA-1BTr3VC8-PDIJxjd6IPhJJFUvB891Vivi0OEQNbvBWjtAJF1xyYTxqWElec76wc'
+  },
+  'content': '末世报',
+  'giftImage': {
+    'urlListList': [
+      '\nVhttp://p11-webcast.douyinpic.com/img/webcast/userlabel_regular_chat.png~tplv-obj.image*\x07#FFEBEB'
+    ],
+    'width': '50'
+  },
+  'eventTime': '1718542929'
+}
