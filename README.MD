@@ -11,6 +11,7 @@
 ```
 python 3.9 
 ```
+附上windows的python3.9.2安装包：https://wwd.lanzouq.com/i6AEm02zzppi
 
 ## 安装依赖
 
