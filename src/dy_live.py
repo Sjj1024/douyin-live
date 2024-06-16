@@ -5,6 +5,7 @@ import json
 import os
 import signal
 from config import LIVE_GIFT_LIST
+from src.utils.http_send import send_all
 from src.utils.logger import logger
 import re
 import time
@@ -108,6 +109,7 @@ def unPackWebcastCommonTextMessage(data):
     commonTextMessage = CommonTextMessage()
     commonTextMessage.ParseFromString(data)
     data = json_format.MessageToDict(commonTextMessage, preserving_proto_field_name=True)
+    send_all(data)
     log = json.dumps(data, ensure_ascii=False)
     logger.info('[unPackWebcastCommonTextMessage] [] [房间Id：' + liveRoomId + '] | ' + log)
     return data
@@ -117,6 +119,7 @@ def WebcastProductChangeMessage(data):
     commonTextMessage = ProductChangeMessage()
     commonTextMessage.ParseFromString(data)
     data = json_format.MessageToDict(commonTextMessage, preserving_proto_field_name=True)
+    send_all(data)
     log = json.dumps(data, ensure_ascii=False)
     logger.info('[WebcastProductChangeMessage] [] [房间Id：' + liveRoomId + '] | ' + log)
 
@@ -134,6 +137,7 @@ def unPackWebcastRoomUserSeqMessage(data):
     roomUserSeqMessage = RoomUserSeqMessage()
     roomUserSeqMessage.ParseFromString(data)
     data = json_format.MessageToDict(roomUserSeqMessage, preserving_proto_field_name=True)
+    send_all(data)
     log = json.dumps(data, ensure_ascii=False)
     logger.info('[unPackWebcastRoomUserSeqMessage] [] [房间Id：' + liveRoomId + '] | ' + log)
     return data
@@ -143,6 +147,7 @@ def unPackWebcastSocialMessage(data):
     socialMessage = SocialMessage()
     socialMessage.ParseFromString(data)
     data = json_format.MessageToDict(socialMessage, preserving_proto_field_name=True)
+    send_all(data)
     log = json.dumps(data, ensure_ascii=False)
     logger.info('[unPackWebcastSocialMessage] [➕直播间关注消息] [房间Id：' + liveRoomId + '] | ' + log)
     return data
@@ -154,6 +159,7 @@ def unPackWebcastChatMessage(data):
     chatMessage = ChatMessage()
     chatMessage.ParseFromString(data)
     data = json_format.MessageToDict(chatMessage, preserving_proto_field_name=True)
+    send_all(data)
     log = json.dumps(data, ensure_ascii=False)
     logger.info(
         f'[unPackWebcastChatMessage] [直播间弹幕消息{GlobalVal.commit_num}] [房间Id：' + liveRoomId + '] | ' + log)
@@ -166,6 +172,7 @@ def unPackWebcastGiftMessage(data):
     giftMessage.ParseFromString(data)
     data = json_format.MessageToDict(giftMessage, preserving_proto_field_name=True)
     try:
+        send_all(data)
         gift_name = data.get("gift").get("name")
         nick_name = data.get("user").get("nickName")
         # 抖音礼物唯一标识
@@ -194,6 +201,7 @@ def unPackWebcastMemberMessage(data):
     memberMessage = MemberMessage()
     memberMessage.ParseFromString(data)
     data = json_format.MessageToDict(memberMessage, preserving_proto_field_name=True)
+    send_all(data)
     # 直播间人数统计
     member_num = int(data.get("memberCount", 0))
     log = json.dumps(data, ensure_ascii=False)
@@ -206,7 +214,7 @@ def unPackWebcastLikeMessage(data):
     likeMessage = LikeMessage()
     likeMessage.ParseFromString(data)
     data = json_format.MessageToDict(likeMessage, preserving_proto_field_name=True)
-    # like_num = int(data["total"])
+    send_all(data)
     GlobalVal.like_num = int(data.get("total", 0))
     log = json.dumps(data, ensure_ascii=False)
     logger.info(f'[unPackWebcastLikeMessage] [直播间点赞统计{data["total"]}] [房间Id：' + liveRoomId + '] | ' + log)
