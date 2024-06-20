@@ -1,9 +1,9 @@
 import logging
-
 from config import LIVE_ROOM_URL
 from src import dy_live
 from src.utils.common import init_global
 from src.utils.http_send import send_start
+
 
 if __name__ == '__main__':
     # 日志配置
