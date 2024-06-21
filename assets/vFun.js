@@ -1,8 +1,11 @@
 var sFunc = function (e, t) {
     // 判断e是不是string类型，是的话，把t赋值给e，然后
     e.constructor == String
-        ? stringToBytes(e)
-        : oFunc(e)
+        ? (e =
+              t && 'binary' === t.encoding
+                  ? astringToBytes(e)
+                  : nstringToBytes(e))
+        : o(e)
         ? (e = Array.prototype.slice.call(e, 0))
         : Array.isArray(e) || e.constructor === Uint8Array || (e = e.toString())
     for (
@@ -97,9 +100,6 @@ var sFunc = function (e, t) {
     return endian([c, u, p, d])
 }
 
-// (s._blocksize = 16)
-// (s._digestsize = 16)
-
 const sff = function (e, t, r, i, n, o, a) {
     var s = e + ((t & r) | (~t & i)) + (n >>> 0) + a
     return ((s << o) | (s >>> (32 - o))) + t
@@ -120,12 +120,17 @@ const sii = function (e, t, r, i, n, o, a) {
     return ((s << o) | (s >>> (32 - o))) + t
 }
 
-const stringToBytes = function (str) {
+const astringToBytes = function (str) {
     var array = new Uint8Array(str.length)
     for (var i = 0, l = str.length; i < l; i++) {
         array[i] = str.charCodeAt(i)
     }
     return array
+}
+
+const nstringToBytes = function (e) {
+    for (var t = [], r = 0; r < e.length; r++) t.push(255 & e.charCodeAt(r))
+    return t
 }
 
 const oFunc = function (e) {
@@ -166,4 +171,34 @@ const bytesToHex = function (e) {
     for (var t = [], r = 0; r < e.length; r++)
         t.push((e[r] >>> 4).toString(16)), t.push((15 & e[r]).toString(16))
     return t.join('')
+}
+
+const creatSignature = (roomId) => {
+    const o = `,live_id=1,aid=6383,version_code=180800,webcast_sdk_version=1.0.14-beta.0,room_id=${roomId},sub_room_id=,sub_channel_id=,did_rule=3,user_unique_id=7347516590731134502,device_platform=web,device_type=,ac=,identity=audience`
+    // let a = V()(o.substring(1)) = bytesToHex（ wordsToBytes（sFunc（e）））
+    // 同一个直播间：生成的a是固定不变的，不同浏览器生成的a是不一样的
+    // 应该是和浏览器也有关系的，因为不同的浏览器，同一个直播间，生成的a不一样，然后使用另外一个浏览器的a生成的签名依然不能使用，因为代码里面的浏览器是google
+    const substr = o.substring(1)
+    console.log('subStr----', substr)
+    // s函数就是stringToBytes
+    const sResult = sFunc(substr)
+    // 同一个直播间生成的S结果一样
+    //  V()函数就是
+    console.log('s函数stringToBytes结果', sResult)
+    // 有了s的返回结果，再调用i.wordsToBytes
+    // var r = i.wordsToBytes(s(e, t));
+    const r = wordsToBytes(sResult)
+    console.log('r----', r)
+    // 最后调用bytesToHex;
+    // return t && t.asBytes ? r : t && t.asString ? a.bytesToString(r) : i.bytesToHex(r)
+    const bytesRes = bytesToHex(r)
+    // 用douyin上生成的这个a就可以使用
+    // const bytesRes = '069bd6275204dd05fcf936917710f656'
+    //                   a5faced0e2965a966b9fde2044e3ff1e
+    //                   069bd6275204dd05fcf936917710f656
+    console.log('a----', bytesRes)
+    const frontierSignRes = window.byted_acrawler.frontierSign({
+        'X-MS-STUB': bytesRes,
+    })
+    console.log('frontierSignRes----', frontierSignRes)
 }
