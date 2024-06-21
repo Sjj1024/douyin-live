@@ -341,27 +341,27 @@ def parseLiveRoomUrl(url):
     logger.info(f"直播流FLV地址是: {res_stream_flv}")
     print(f"直播流FLV地址是: {res_stream_flv}")
     # 开始获取直播间排行
-    live_rank.interval_rank(liveRoomId)
+    # live_rank.interval_rank(liveRoomId)
     # 创建websocket客户端，并开始监听消息
-    # signature = creat_signature(liveRoomId)
-    wssServerStart("")
+    signature = creat_signature(liveRoomId)
+    # wssServerStart("")
 
 
 # 生成签名
 def creat_signature(room_id):
     print("生成签名")
-    with open("assets/vFun.js") as f:
-        vfunc_code = f.read()
-    vfunc_compile = execjs.compile(vfunc_code)
-    # with open("assets/webmssdk.es5.js") as f:
-    #     webmssdk_code = f.read()
-    # webms_compile = execjs.compile(vfunc_code)
-    bytesRes = vfunc_compile.call("creatSignature", room_id)
-    print(f"bytesRes-----:{bytesRes}")
+    # with open("assets/vFun.js") as f:
+    #     vfunc_code = f.read()
+    # vfunc_compile = execjs.compile(vfunc_code)
+    with open("assets/webmssdk.es5.js") as f:
+        webmssdk_code = f.read()
+    webms_compile = execjs.compile(webmssdk_code)
+    # bytesRes = vfunc_compile.call("window.creatSignature", room_id)
+    # print(f"bytesRes-----:{bytesRes}")
     # 调用frontierSign函数解密
-    # frontierSignRes = webms_compile.call("window.byted_acrawler.frontierSign", {'X-MS-STUB': bytesRes})
+    frontierSignRes = webms_compile.call("window.byted_acrawler", {'X-MS-STUB': "bytesRes"})
     # print(f"frontierSignRes:{frontierSignRes}")
-    return bytesRes
+    return frontierSignRes
 
 
 # 十六进制字符串转protobuf格式(用于快手网页websocket调试分析包体结构)
