@@ -10,6 +10,7 @@ import re
 import time
 import requests
 import websocket
+import execjs
 from src.utils.ws_send import ws_sender
 from src import live_rank
 from src.utils.common import GlobalVal
@@ -268,10 +269,9 @@ def ping(ws):
         time.sleep(10)
 
 
-def wssServerStart():
+def wssServerStart(signature):
     websocket.enableTrace(False)
     # 拼接获取弹幕消息的websocket的链接
-    # socket_url = f"""wss://webcast5-ws-web-lf.douyin.com/webcast/im/push/v2/?app_name=douyin_web&version_code=180800&webcast_sdk_version=1.0.14-beta.0&update_version_code=1.0.14-beta.0&compress=gzip&device_platform=web&cookie_enabled=true&screen_width=1470&screen_height=956&browser_language=zh-CN&browser_platform=MacIntel&browser_name=Mozilla&browser_version=5.0%20(Macintosh;%20Intel%20Mac%20OS%20X%2010_15_7)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/125.0.0.0%20Safari/537.36&browser_online=true&tz_name=Asia/Shanghai&cursor=t-1718889258481_r-1_d-1_u-1_fh-7382572598213268506&internal_ext=internal_src:dim|wss_push_room_id:{liveRoomId}|wss_push_did:7347145653502019126|first_req_ms:1718889258376|fetch_time:1718889258481|seq:1|wss_info:0-1718889258481-0-0|wrds_v:7382573131375846404&host=https://live.douyin.com&aid=6383&live_id=1&did_rule=3&endpoint=live_pc&support_wrds=1&user_unique_id=7347145653502019126&im_path=/webcast/im/fetch/&identity=audience&need_persist_msg_count=15&insert_task_id=&live_reason=&room_id={liveRoomId}&heartbeatDuration=0&signature=6gK6lxl48wh Mxdc"""
     socket_url = f"""wss://webcast5-ws-web-lf.douyin.com/webcast/im/push/v2/?app_name=douyin_web&version_code=180800&webcast_sdk_version=1.0.14-beta.0&update_version_code=1.0.14-beta.0&compress=gzip&device_platform=web&cookie_enabled=true&screen_width=1512&screen_height=982&browser_language=zh-CN&browser_platform=MacIntel&browser_name=Mozilla&browser_version=5.0%20(Macintosh;%20Intel%20Mac%20OS%20X%2010_15_7)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/126.0.0.0%20Safari/537.36&browser_online=true&tz_name=Asia/Shanghai&internal_ext=internal_src:dim|wss_push_room_id:{liveRoomId}|wss_push_did:7347516590731134502|first_req_ms:1718958540257|fetch_time:1718958540387|seq:1|wss_info:0-1718958540387-0-0|wrds_v:7382870712479910356&host=https://live.douyin.com&aid=6383&live_id=1&did_rule=3&endpoint=live_pc&support_wrds=1&user_unique_id=7347516590731134502&im_path=/webcast/im/fetch/&identity=audience&need_persist_msg_count=15&insert_task_id=&live_reason=&room_id={liveRoomId}&heartbeatDuration=0&signature=fDpl4YiMGEEAq3yN"""
     h = {
         'cookie': 'ttwid=' + ttwid,
@@ -343,7 +343,25 @@ def parseLiveRoomUrl(url):
     # 开始获取直播间排行
     live_rank.interval_rank(liveRoomId)
     # 创建websocket客户端，并开始监听消息
-    wssServerStart()
+    # signature = creat_signature(liveRoomId)
+    wssServerStart("")
+
+
+# 生成签名
+def creat_signature(room_id):
+    print("生成签名")
+    with open("assets/vFun.js") as f:
+        vfunc_code = f.read()
+    vfunc_compile = execjs.compile(vfunc_code)
+    # with open("assets/webmssdk.es5.js") as f:
+    #     webmssdk_code = f.read()
+    # webms_compile = execjs.compile(vfunc_code)
+    bytesRes = vfunc_compile.call("creatSignature", room_id)
+    print(f"bytesRes-----:{bytesRes}")
+    # 调用frontierSign函数解密
+    # frontierSignRes = webms_compile.call("window.byted_acrawler.frontierSign", {'X-MS-STUB': bytesRes})
+    # print(f"frontierSignRes:{frontierSignRes}")
+    return bytesRes
 
 
 # 十六进制字符串转protobuf格式(用于快手网页websocket调试分析包体结构)
