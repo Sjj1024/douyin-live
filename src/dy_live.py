@@ -11,7 +11,7 @@ import time
 import requests
 import websocket
 import random, hashlib, jsengine
-from urllib.parse import unquote, urlparse, parse_qs, urlencode, urlunparse
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from src.utils.ws_send import ws_sender
 from src import live_rank
 from src.utils.common import GlobalVal
