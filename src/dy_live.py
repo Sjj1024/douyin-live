@@ -10,7 +10,7 @@ import re
 import time
 import requests
 import websocket
-import random,hashlib,jsengine
+import random, hashlib, jsengine
 from urllib.parse import unquote, urlparse, parse_qs, urlencode, urlunparse
 from src.utils.ws_send import ws_sender
 from src import live_rank
@@ -40,6 +40,7 @@ live_stream_url = ""
 start_time = time.time()
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0'
+
 
 def onMessage(ws: websocket.WebSocketApp, message: bytes):
     # 相当于每一条消息
@@ -290,6 +291,7 @@ def wssServerStart(wsurl):
 def get_user_unique_id():
     return str(random.randint(7300000000000000000, 7999999999999999999))
 
+
 def get_x_ms_stub(params):
     sig_params = ','.join([f'{k}={v}' for k, v in params.items()])
     return hashlib.md5(sig_params.encode()).hexdigest()
@@ -300,7 +302,9 @@ def load_webmssdk(js_file):
     js_path = os.path.join(dir_path, js_file)
     with open(js_path, 'r', encoding='utf-8') as f:
         return f.read()
-#port from https://github.com/biliup/biliup/commit/b19131548dd50713482fd721986806ebdcd5782f
+
+
+# port from https://github.com/biliup/biliup/commit/b19131548dd50713482fd721986806ebdcd5782f
 def get_signature(x_ms_stub):
     try:
         ctx = jsengine.jsengine()
@@ -321,6 +325,7 @@ navigator = {{
     except:
         logger.exception("get_signature error")
     return "00000000"
+
 
 def parseLiveRoomUrl(url):
     """
@@ -381,50 +386,50 @@ def parseLiveRoomUrl(url):
 
     USER_UNIQUE_ID = get_user_unique_id()
     VERSION_CODE = 180800
-    WEBCAST_SDK_VERSION = "1.0.14-beta.0" 
+    WEBCAST_SDK_VERSION = "1.0.14-beta.0"
     sig_params = {
-                "live_id": "1",
-                "aid": "6383",
-                "version_code": VERSION_CODE,
-                "webcast_sdk_version": WEBCAST_SDK_VERSION,
-                "room_id": liveRoomId,
-                "sub_room_id": "",
-                "sub_channel_id": "",
-                "did_rule": "3",
-                "user_unique_id": USER_UNIQUE_ID,
-                "device_platform": "web",
-                "device_type": "",
-                "ac": "",
-                "identity": "audience"
+        "live_id": "1",
+        "aid": "6383",
+        "version_code": VERSION_CODE,
+        "webcast_sdk_version": WEBCAST_SDK_VERSION,
+        "room_id": liveRoomId,
+        "sub_room_id": "",
+        "sub_channel_id": "",
+        "did_rule": "3",
+        "user_unique_id": USER_UNIQUE_ID,
+        "device_platform": "web",
+        "device_type": "",
+        "ac": "",
+        "identity": "audience"
     }
     signature = get_signature(get_x_ms_stub(sig_params))
     webcast5_params = {
-                "room_id": liveRoomId,
-                "compress": 'gzip',
-                # "app_name": "douyin_web",
-                "version_code": VERSION_CODE,
-                "webcast_sdk_version": WEBCAST_SDK_VERSION,
-                # "update_version_code": "1.0.14-beta.0",
-                # "cookie_enabled": "true",
-                # "screen_width": "1920",
-                # "screen_height": "1080",
-                # "browser_online": "true",
-                # "tz_name": "Asia/Shanghai",
-                # "cursor": "t-1718899404570_r-1_d-1_u-1_h-7382616636258522175",
-                # "internal_ext": "internal_src:dim|wss_push_room_id:7382580251462732598|wss_push_did:7344670681018189347|first_req_ms:1718899404493|fetch_time:1718899404570|seq:1|wss_info:0-1718899404570-0-0|wrds_v:7382616716703957597",
-                # "host": "https://live.douyin.com",
-                "live_id": "1",
-                "did_rule": "3",
-                # "endpoint": "live_pc",
-                # "support_wrds": "1",
-                "user_unique_id": USER_UNIQUE_ID,
-                # "im_path": "/webcast/im/fetch/",
-                "identity": "audience",
-                # "need_persist_msg_count": "15",
-                # "insert_task_id": "",
-                # "live_reason": "",
-                # "heartbeatDuration": "0",
-                "signature": signature,
+        "room_id": liveRoomId,
+        "compress": 'gzip',
+        # "app_name": "douyin_web",
+        "version_code": VERSION_CODE,
+        "webcast_sdk_version": WEBCAST_SDK_VERSION,
+        # "update_version_code": "1.0.14-beta.0",
+        # "cookie_enabled": "true",
+        # "screen_width": "1920",
+        # "screen_height": "1080",
+        # "browser_online": "true",
+        # "tz_name": "Asia/Shanghai",
+        # "cursor": "t-1718899404570_r-1_d-1_u-1_h-7382616636258522175",
+        # "internal_ext": "internal_src:dim|wss_push_room_id:7382580251462732598|wss_push_did:7344670681018189347|first_req_ms:1718899404493|fetch_time:1718899404570|seq:1|wss_info:0-1718899404570-0-0|wrds_v:7382616716703957597",
+        # "host": "https://live.douyin.com",
+        "live_id": "1",
+        "did_rule": "3",
+        # "endpoint": "live_pc",
+        # "support_wrds": "1",
+        "user_unique_id": USER_UNIQUE_ID,
+        # "im_path": "/webcast/im/fetch/",
+        "identity": "audience",
+        # "need_persist_msg_count": "15",
+        # "insert_task_id": "",
+        # "live_reason": "",
+        # "heartbeatDuration": "0",
+        "signature": signature,
     }
     wss_url = f"wss://webcast5-ws-web-lf.douyin.com/webcast/im/push/v2/?{'&'.join([f'{k}={v}' for k, v in webcast5_params.items()])}"
     wss_url = build_request_url(wss_url)
@@ -450,6 +455,7 @@ def build_request_url(url):
         parsed_url.fragment
     ))
     return new_url
+
 
 # 十六进制字符串转protobuf格式(用于快手网页websocket调试分析包体结构)
 def hexStrToProtobuf(hexStr):
