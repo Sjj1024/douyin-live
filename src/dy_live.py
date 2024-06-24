@@ -10,7 +10,8 @@ import re
 import time
 import requests
 import websocket
-import execjs
+import random, hashlib, jsengine
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from src.utils.ws_send import ws_sender
 from src import live_rank
 from src.utils.common import GlobalVal
@@ -37,6 +38,8 @@ liveRoomTitle = ''
 live_stream_url = ""
 # 记录抓取直播时间
 start_time = time.time()
+
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0'
 
 
 def onMessage(ws: websocket.WebSocketApp, message: bytes):
@@ -269,21 +272,59 @@ def ping(ws):
         time.sleep(10)
 
 
-def wssServerStart(signature):
+def wssServerStart(wsurl):
     websocket.enableTrace(False)
-    # 拼接获取弹幕消息的websocket的链接
-    socket_url = f"""wss://webcast5-ws-web-lf.douyin.com/webcast/im/push/v2/?app_name=douyin_web&version_code=180800&webcast_sdk_version=1.0.14-beta.0&update_version_code=1.0.14-beta.0&compress=gzip&device_platform=web&cookie_enabled=true&screen_width=1512&screen_height=982&browser_language=zh-CN&browser_platform=MacIntel&browser_name=Mozilla&browser_version=5.0%20(Macintosh;%20Intel%20Mac%20OS%20X%2010_15_7)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/126.0.0.0%20Safari/537.36&browser_online=true&tz_name=Asia/Shanghai&internal_ext=internal_src:dim|wss_push_room_id:{liveRoomId}|wss_push_did:7347516590731134502|first_req_ms:1718958540257|fetch_time:1718958540387|seq:1|wss_info:0-1718958540387-0-0|wrds_v:7382870712479910356&host=https://live.douyin.com&aid=6383&live_id=1&did_rule=3&endpoint=live_pc&support_wrds=1&user_unique_id=7347516590731134502&im_path=/webcast/im/fetch/&identity=audience&need_persist_msg_count=15&insert_task_id=&live_reason=&room_id={liveRoomId}&heartbeatDuration=0&signature=fDpl4YiMGEEAq3yN"""
     h = {
         'cookie': 'ttwid=' + ttwid,
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+        'user-agent': USER_AGENT,
     }
+    logger.info(f'弹幕监听地址wsurl:{wsurl}')
     # 创建一个长连接，并开始侦听消息
     ws = websocket.WebSocketApp(
-        socket_url, on_message=onMessage, on_error=onError, on_close=onClose,
+        wsurl, on_message=onMessage, on_error=onError, on_close=onClose,
         on_open=onOpen,
         header=h
     )
     ws.run_forever()
+
+
+def get_user_unique_id():
+    return str(random.randint(7300000000000000000, 7999999999999999999))
+
+
+def get_x_ms_stub(params):
+    sig_params = ','.join([f'{k}={v}' for k, v in params.items()])
+    return hashlib.md5(sig_params.encode()).hexdigest()
+
+
+def load_webmssdk(js_file):
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    js_path = os.path.join(dir_path, js_file)
+    with open(js_path, 'r', encoding='utf-8') as f:
+        return f.read()
+
+
+# port from https://github.com/biliup/biliup/commit/b19131548dd50713482fd721986806ebdcd5782f
+def get_signature(x_ms_stub):
+    try:
+        ctx = jsengine.jsengine()
+        js_dom = f"""
+document = {{}}
+window = {{}}
+navigator = {{
+'userAgent': '{USER_AGENT}'
+}}
+""".strip()
+        js_enc = load_webmssdk('webmssdk.js')
+        final_js = js_dom + js_enc
+        ctx.eval(final_js)
+        function_caller = f"get_sign('{x_ms_stub}')"
+        signature = ctx.eval(function_caller)
+        # print("signature: ", signature)
+        return signature
+    except:
+        logger.exception("get_signature error")
+    return "00000000"
 
 
 def parseLiveRoomUrl(url):
@@ -300,7 +341,7 @@ def parseLiveRoomUrl(url):
         'cookie': 'xgplayer_user_id=251959789708; passport_assist_user=Cj1YUtyK7x-Br11SPK-ckKl61u5KX_SherEuuGPYIkLjtmV3X8m3EU1BAGVoO541Sp_jwUa8lBlNmbaOQqheGkoKPOVVH42rXu6KEb9WR85pUw4_qNHfbcotEO-cml5itrJowMBlYXDaB-GDqJwNMxMElMoZUycGhzdNVAT4XxCJ_74NGImv1lQgASIBA3Iymus%3D; n_mh=nNwOatDm453msvu0tqEj4bZm3NsIprwo6zSkIjLfICk; LOGIN_STATUS=1; store-region=cn-sh; store-region-src=uid; sid_guard=b177a545374483168432b16b963f04d5%7C1697713285%7C5183999%7CMon%2C+18-Dec-2023+11%3A01%3A24+GMT; ttwid=1%7C9SEGPfK9oK2Ku60vf6jyt7h6JWbBu4N_-kwQdU-SPd8%7C1697721607%7Cc406088cffa073546db29932058720720521571b92ba67ba902a70e5aaffd5d6; odin_tt=1f738575cbcd5084c21c7172736e90f845037328a006beefec4260bf8257290e2d31b437856575c6caeccf88af429213; __live_version__=%221.1.1.6725%22; device_web_cpu_core=16; device_web_memory_size=8; live_use_vvc=%22false%22; csrf_session_id=38b68b1e672a92baa9dcb4d6fd1c5325; FORCE_LOGIN=%7B%22videoConsumedRemainSeconds%22%3A180%7D; __ac_nonce=0658d6780004b23f5d0a8; __ac_signature=_02B4Z6wo00f01Klw1CQAAIDAXxndAbr7OHypUNCAAE.WSwYKFjGSE9AfNTumbVmy1cCS8zqYTadqTl8vHoAv7RMb8THl082YemGIElJtZYhmiH-NnOx53mVMRC7MM8xuavIXc-9rE7ZEgXaA13; webcast_leading_last_show_time=1703765888956; webcast_leading_total_show_times=1; webcast_local_quality=sd; xg_device_score=7.90435294117647; live_can_add_dy_2_desktop=%221%22; msToken=sTwrsWOpxsxXsirEl0V0d0hkbGLze4faRtqNZrIZIuY8GYgo2J9a0RcrN7r_l179C9AQHmmloI94oDvV8_owiAg6zHueq7lX6TgbKBN6OZnyfvZ6OJyo2SQYawIB_g==; tt_scid=NyxJTt.vWxv79efmWAzT2ZAiLSuybiEOWF0wiVYs5KngMuBf8oz5sqzpg5XoSPmie930; pwa2=%220%7C0%7C1%7C0%22; download_guide=%223%2F20231228%2F0%22; msToken=of81bsT85wrbQ9nVOK3WZqQwwku95KW-wLfjFZOef2Orr8PRQVte27t6Mkc_9c_ROePolK97lKVG3IL5xrW6GY6mdUDB0EcBPfnm8-OAShXzlELOxBBCdiQYIjCGpQ==; IsDouyinActive=false; odin_tt=7409a7607c84ba28f27c62495a206c66926666f2bbf038c847b27817acbdbff28c3cf5930de4681d3cfd4c1139dd557e; ttwid=1%7C9SEGPfK9oK2Ku60vf6jyt7h6JWbBu4N_-kwQdU-SPd8%7C1697721607%7Cc406088cffa073546db29932058720720521571b92ba67ba902a70e5aaffd5d6',
         'referer': 'https://live.douyin.com/721566130345?cover_type=&enter_from_merge=web_live&enter_method=web_card&game_name=&is_recommend=&live_type=game&more_detail=&room_id=7317569386624125734&stream_type=vertical&title_type=&web_live_tab=all',
         'upgrade-insecure-requests': '1',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0'
+        'user-agent': USER_AGENT
     }
     res = requests.get(url=url, headers=headers)
     global ttwid, roomStore, liveRoomId, liveRoomTitle, live_stream_url
@@ -342,26 +383,78 @@ def parseLiveRoomUrl(url):
     print(f"直播流FLV地址是: {res_stream_flv}")
     # 开始获取直播间排行
     live_rank.interval_rank(liveRoomId)
-    # 创建websocket客户端，并开始监听消息
-    # signature = creat_signature(liveRoomId)
-    wssServerStart("")
+
+    USER_UNIQUE_ID = get_user_unique_id()
+    VERSION_CODE = 180800
+    WEBCAST_SDK_VERSION = "1.0.14-beta.0"
+    sig_params = {
+        "live_id": "1",
+        "aid": "6383",
+        "version_code": VERSION_CODE,
+        "webcast_sdk_version": WEBCAST_SDK_VERSION,
+        "room_id": liveRoomId,
+        "sub_room_id": "",
+        "sub_channel_id": "",
+        "did_rule": "3",
+        "user_unique_id": USER_UNIQUE_ID,
+        "device_platform": "web",
+        "device_type": "",
+        "ac": "",
+        "identity": "audience"
+    }
+    signature = get_signature(get_x_ms_stub(sig_params))
+    webcast5_params = {
+        "room_id": liveRoomId,
+        "compress": 'gzip',
+        # "app_name": "douyin_web",
+        "version_code": VERSION_CODE,
+        "webcast_sdk_version": WEBCAST_SDK_VERSION,
+        # "update_version_code": "1.0.14-beta.0",
+        # "cookie_enabled": "true",
+        # "screen_width": "1920",
+        # "screen_height": "1080",
+        # "browser_online": "true",
+        # "tz_name": "Asia/Shanghai",
+        # "cursor": "t-1718899404570_r-1_d-1_u-1_h-7382616636258522175",
+        # "internal_ext": "internal_src:dim|wss_push_room_id:7382580251462732598|wss_push_did:7344670681018189347|first_req_ms:1718899404493|fetch_time:1718899404570|seq:1|wss_info:0-1718899404570-0-0|wrds_v:7382616716703957597",
+        # "host": "https://live.douyin.com",
+        "live_id": "1",
+        "did_rule": "3",
+        # "endpoint": "live_pc",
+        # "support_wrds": "1",
+        "user_unique_id": USER_UNIQUE_ID,
+        # "im_path": "/webcast/im/fetch/",
+        "identity": "audience",
+        # "need_persist_msg_count": "15",
+        # "insert_task_id": "",
+        # "live_reason": "",
+        # "heartbeatDuration": "0",
+        "signature": signature,
+    }
+    wss_url = f"wss://webcast5-ws-web-lf.douyin.com/webcast/im/push/v2/?{'&'.join([f'{k}={v}' for k, v in webcast5_params.items()])}"
+    wss_url = build_request_url(wss_url)
+    wssServerStart(wss_url)
 
 
-# 生成签名
-def creat_signature(room_id):
-    print("生成签名")
-    with open("assets/vFun.js") as f:
-        vfunc_code = f.read()
-    vfunc_compile = execjs.compile(vfunc_code)
-    # with open("assets/webmssdk.es5.js") as f:
-    #     webmssdk_code = f.read()
-    # webms_compile = execjs.compile(vfunc_code)
-    bytesRes = vfunc_compile.call("creatSignature", room_id)
-    print(f"bytesRes-----:{bytesRes}")
-    # 调用frontierSign函数解密
-    # frontierSignRes = webms_compile.call("window.byted_acrawler.frontierSign", {'X-MS-STUB': bytesRes})
-    # print(f"frontierSignRes:{frontierSignRes}")
-    return bytesRes
+def build_request_url(url):
+    parsed_url = urlparse(url)
+    existing_params = parse_qs(parsed_url.query)
+    existing_params['aid'] = ['6383']
+    existing_params['device_platform'] = ['web']
+    existing_params['browser_language'] = ['zh-CN']
+    existing_params['browser_platform'] = ['Win32']
+    existing_params['browser_name'] = [USER_AGENT.split('/')[0]]
+    existing_params['browser_version'] = [USER_AGENT.split(existing_params['browser_name'][0])[-1][1:]]
+    new_query_string = urlencode(existing_params, doseq=True)
+    new_url = urlunparse((
+        parsed_url.scheme,
+        parsed_url.netloc,
+        parsed_url.path,
+        parsed_url.params,
+        new_query_string,
+        parsed_url.fragment
+    ))
+    return new_url
 
 
 # 十六进制字符串转protobuf格式(用于快手网页websocket调试分析包体结构)
