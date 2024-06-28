@@ -105,6 +105,10 @@ def onMessage(ws: websocket.WebSocketApp, message: bytes):
         if msg.method == 'WebcastProductChangeMessage':
             WebcastProductChangeMessage(msg.payload)
             continue
+
+        # WebcastRoomStatsMessage
+        if msg.method == 'WebcastRoomStatsMessage':
+            print("WebcastRoomStatsMessage")
         logger.info('[onMessage] [待解析方法' + msg.method + '等待解析～] [房间Id：' + liveRoomId + ']')
 
 
@@ -273,7 +277,7 @@ def ping(ws):
 
 
 def wssServerStart(wsurl):
-    websocket.enableTrace(False)
+    # websocket.enableTrace(False)
     h = {
         'cookie': 'ttwid=' + ttwid,
         'user-agent': USER_AGENT,
@@ -406,29 +410,12 @@ def parseLiveRoomUrl(url):
     webcast5_params = {
         "room_id": liveRoomId,
         "compress": 'gzip',
-        # "app_name": "douyin_web",
         "version_code": VERSION_CODE,
         "webcast_sdk_version": WEBCAST_SDK_VERSION,
-        # "update_version_code": "1.0.14-beta.0",
-        # "cookie_enabled": "true",
-        # "screen_width": "1920",
-        # "screen_height": "1080",
-        # "browser_online": "true",
-        # "tz_name": "Asia/Shanghai",
-        # "cursor": "t-1718899404570_r-1_d-1_u-1_h-7382616636258522175",
-        # "internal_ext": "internal_src:dim|wss_push_room_id:7382580251462732598|wss_push_did:7344670681018189347|first_req_ms:1718899404493|fetch_time:1718899404570|seq:1|wss_info:0-1718899404570-0-0|wrds_v:7382616716703957597",
-        # "host": "https://live.douyin.com",
         "live_id": "1",
         "did_rule": "3",
-        # "endpoint": "live_pc",
-        # "support_wrds": "1",
         "user_unique_id": USER_UNIQUE_ID,
-        # "im_path": "/webcast/im/fetch/",
         "identity": "audience",
-        # "need_persist_msg_count": "15",
-        # "insert_task_id": "",
-        # "live_reason": "",
-        # "heartbeatDuration": "0",
         "signature": signature,
     }
     wss_url = f"wss://webcast5-ws-web-lf.douyin.com/webcast/im/push/v2/?{'&'.join([f'{k}={v}' for k, v in webcast5_params.items()])}"
