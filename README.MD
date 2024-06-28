@@ -10,6 +10,14 @@ python 3.9
 ```
 附上windows的python3.9.2安装包：https://wwd.lanzouq.com/i6AEm02zzppi
 
+## 另有桌面版  
+仓库地址：https://github.com/Sjj1024/LiveBox  
+桌面安装包下载地址：  
+https://github.com/Sjj1024/LiveBox/releases
+
+桌面版展示：
+![img.png](assets/img.png)
+![img.png](assets/img2.png)
 
 # 注意注意
 注意：这只是Python学习研究直播技术的仓库，不是黑客。请勿用于非法用途。一切违法行为后果自负！
