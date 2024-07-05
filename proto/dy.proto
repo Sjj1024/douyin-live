@@ -508,7 +508,6 @@ message PushFrame {
   string payloadEncoding = 6;
   string payloadType = 7;
   bytes payload = 8;
-
 }
 
 message kk {

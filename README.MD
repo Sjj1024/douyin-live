@@ -17,7 +17,7 @@ https://github.com/Sjj1024/LiveBox/releases
 
 桌面版展示：
 ![img.png](assets/img.png)
-![img.png](assets/image-5.png)
+![img.png](assets/img6.png)
 
 # 注意注意
 注意：这只是Python学习研究直播技术的仓库，不是黑客。请勿用于非法用途。一切违法行为后果自负！
