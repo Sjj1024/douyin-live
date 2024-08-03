@@ -19,5 +19,14 @@ https://github.com/Sjj1024/LiveBox/releases
 ![img.png](assets/img.png)
 ![img.png](assets/img6.png)
 
+
+
+## 赞助
+
+开源不易, 有了您的赞助, 我们会做的更好~
+![alt text](./analysis/pay.png)
+
+
+
 # 注意注意
 注意：这只是Python学习研究直播技术的仓库，不是黑客。请勿用于非法用途。一切违法行为后果自负！
