@@ -24,7 +24,7 @@ https://github.com/Sjj1024/LiveBox/releases
 ## 赞助
 
 开源不易, 有了您的赞助, 我们会做的更好~
-![alt text](./analysis/pay.png)
+![alt text](./assets/pay.png)
 
 
 
