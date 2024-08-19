@@ -9,5 +9,6 @@ requests==2.31.0
 soupsieve==2.5
 urllib3==2.0.4
 websocket-client==1.6.3
-jsengine
+jsengine~=1.0.7.post1
 quickjs
+Flask~=3.0.3
