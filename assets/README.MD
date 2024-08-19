@@ -19,6 +19,7 @@ https://github.com/Sjj1024/LiveBox/releases
 ![img.png](assets/img.png)
 ![img.png](assets/img6.png)
 
+![img_1.png](img_1.png)
 
 ## 赞助
 
