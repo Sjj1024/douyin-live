@@ -11,7 +11,7 @@ python 3.9
 附上windows的python3.9.2安装包：https://wwd.lanzouq.com/i6AEm02zzppi
 
 
-## 另有桌面版  
+# 桌面版本  
 LiveBox仓库地址：https://github.com/Sjj1024/LiveBox  
 桌面安装包下载地址：  
 https://github.com/Sjj1024/LiveBox/releases
@@ -21,19 +21,12 @@ LiveBox桌面版展示：
 ![img.png](assets/img6.png)
 
 
-PakePlus项目：Turn any webpage into a desktop app and mobile app with Rust. 
+# PakePlus项目介绍
+PakePlus项目：Turn any webpage into a desktop app and mobile app with Rust.
 利用 Rust 轻松构建轻量级多端桌面应用和多端手机应用，使用介绍：https://sjj1024.github.io/PakePlus/
 只需要9分钟就可以将任何网站打包成多端应用，仓库地址：https://github.com/Sjj1024/PakePlus  
 PakePlus展示：
 ![img.png](assets/pakeplus.png)
-
-
-
-## 赞助
-
-开源不易, 有了您的赞助, 我们会做的更好~
-![alt text](./assets/pay.png)
-
 
 
 # 注意注意
