@@ -1,89 +1,227 @@
+# 根据包名启动,推荐使用
+# 找到 属性名name 值为 开发者的控件
+from ascript.ios.node import Selector
+from ascript.ios import system
+from ascript.ios import action
 import time
-import requests
-import re
-
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36',
-    'Referer': 'https://www.douyin.com/',
-}
 
 
-# 过滤包含福袋的数据
-def condition(data):
-    lives = data['lives']
-    rawdata = lives['rawdata']
-    # print('当前过滤数据=', lives)
-    # print('当前过滤数据的rawdata=', rawdata)
-    res = 'has_ongoing_lottery' in rawdata
-    # print('当前过滤数据的结果=', res)
-    return res
+def open_huzhijiao():
+    # 音量调至最低
+    # action.key_press(action.KEY_VOLUMDOWN)
+    # action.key_press(action.KEY_VOLUMDOWN)
+    # action.key_press(action.KEY_VOLUMDOWN)
+    # action.key_press(action.KEY_VOLUMDOWN)
+    # action.key_press(action.KEY_VOLUMDOWN)
+    # time.sleep(2)
+    # 根据包名启动,推荐使用
+    system.app_start(bundle_id="com.tencent.xin")
+    time.sleep(2)
+    # 执行沪智慧矫正
+    action_huzhijiao()
 
 
-# 读取短视频列表
-def get_live_list(keyword):
-    retry = 0
-    browser_version = re.findall(r'/(\d+\.\d+\.\d+\.\d+) ', headers['User-Agent'])[0]
-    url = 'https://www.douyin.com/aweme/v1/web/live/search/'
-    params = {
-        "device_platform": "webapp",
-        "aid": "6383",
-        "channel": "channel_pc_web",
-        "version_code": "170400",
-        "version_name": "17.4.0",
-        "cookie_enabled": "true",
-        "screen_width": "1920",
-        "screen_height": "1080",
-        "browser_platform": "Win32",
-        "browser_name": "Chrome",
-        "browser_version": browser_version,
-        "browser_online": "true",
-        "engine_version": browser_version,
-        "os_name": "Windows",
-        "os_version": "10",
-        "cpu_core_num": "8",
-        "device_memory": "8",
-        "platform": "PC",
-        "downlink": "10",
-        "effective_type": "4g",
-        "round_trip_time": "100",
-        "webid": "",
-        "msToken": "",
-        "search_channel": "aweme_live",
-        "keyword": keyword,
-        "search_source": "switch_tab",
-        "query_correct_type": "1",
-        "is_filter_search": "0",
-        "from_group_id": "",
-        "offset": "0",
-        "count": "10",
-        "browser_language": "zh-CN"
-    }
-    # proxies = get_proxy_info()
-    try:
-        # 发送 POST 请求
-        # response = requests.get(url, params=params, headers=headers, proxies=proxies, timeout=10)
-        response = requests.get(url, params=params, headers=headers, timeout=10)
-        # 检查响应状态码
-        if response.status_code == 200:
-            # 响应内容
-            data = response.json()
-            data = data['data']
-            # 筛选出包含福袋的直播数据
-            res = [item for item in data if condition(item)]
-            print('获取关键字直播查询结果=', len(res))
-            return res
-        else:
-            # 请求失败
-            print(f'登录失败:{response.status_code}')
-            raise Exception(f'登录失败:{response.status_code}')
-    except Exception as e:
-        print("请求列表信息异常=", e)
-        print("重试中---", retry)
-        get_live_list(keyword)
+def action_huzhijiao():
+    # 点击我的
+    to_see = Selector().xpath("//*[@name='我的']").find()
+    if to_see:
+        to_see.click()
+        time.sleep(1)
+    # 点击可选任务
+    node = Selector().xpath("//*[@name='可选任务']").find()
+    if node:
+        # 找到了控件
+        print("找到了可选任务")
+        # 打印控件属性,比较耗时
+        node.click()
+        time.sleep(1)
+        # 看视频
+        see_movide()
+        # 学图文
+        see_picture()
+        # 完成后返回到微信
+        # Selector().label("关闭").click(0).find()
+        # print("自动任务已完成")
+        to_see = Selector().xpath("//*[@name='我的']").find()
+        if to_see:
+            to_see.click()
+            time.sleep(1)
+    else:
+        print('没有找到任何控件')
 
 
-if __name__ == '__main__':
-    con = 0
+def see_movide():
+    print("观看视频")
+    to_see = Selector().xpath("//*[@name='我的']").find()
+    if to_see:
+        to_see.click()
+        time.sleep(1)
+    # 点击可选任务
+    node = Selector().xpath("//*[@name='可选任务']").find()
+    if node:
+        # 找到了控件
+        print("找到了可选任务")
+        # 打印控件属性,比较耗时
+        node.click()
+        time.sleep(1)
+        # 去观看
+        to_see = Selector().xpath("//*[@name='去观看']").find()
+        if to_see:
+            to_see.click()
+            # 点击民俗
+            time.sleep(1)
+            # 去观看
+            minsu = Selector().xpath("//*[@name='民俗']").find()
+            if minsu:
+                minsu.click()
+            # 点击春节
+            time.sleep(1)
+            # 去观看 重复4次
+            for i in range(0, 5):
+                tuhua = Selector().xpath("//*[@name='春节年俗图画']").find()
+                if tuhua:
+                    tuhua.click()
+                # 等待6:10分=370秒
+                time.sleep(375)
+                # click back
+                back = Selector().xpath("//*[@name='返回']").find()
+                if back:
+                    back.click()
+                time.sleep(1)
+
+
+def find_fanzha():
+    print("找到反诈提醒")
     while True:
-        get_live_list('奖')
-        time.sleep(5)
+        # Selector().x(15).y(318).scroll("down").find()
+        # time.sleep(1)
+        zhapian = Selector().xpath("//*[@name='重要！反诈骗提醒！']").find()
+        if zhapian:
+            # 滚动到显示
+            zhapian.scroll()
+            print("找到了反诈提醒")
+            return
+        else:
+            print("没有找到反诈提醒")
+
+
+def see_picture():
+    print("看图文知识")
+    to_see = Selector().xpath("//*[@name='我的']").find()
+    if to_see:
+        to_see.click()
+        time.sleep(1)
+    # 点击可选任务
+    node = Selector().xpath("//*[@name='可选任务']").find()
+    if node:
+        # 找到了控件
+        print("找到了可选任务")
+        # 打印控件属性,比较耗时
+        node.click()
+        time.sleep(1)
+        # 去观看
+        to_see = Selector().xpath("//*[@name='去学习']").find()
+        if to_see:
+            to_see.click()
+            time.sleep(1)
+            # 其他，滑动
+            other = Selector().x(324).y(223).find()
+            if other:
+                other.click()
+                time.sleep(1)
+                # 滑动找到反诈提醒
+                find_fanzha()
+                # see fanzhapian
+                for i in range(0, 9):
+                    zhapian = Selector().xpath("//*[@name='重要！反诈骗提醒！']").find()
+                    if zhapian:
+                        zhapian.click()
+                        time.sleep(32)
+                        # back
+                        back = Selector().x(16).y(47).find()
+                        if back:
+                            back.click()
+                            time.sleep(1)
+                    else:
+                        print("没找到 zhapian")
+                print("图文知识看完了")
+            else:
+                print("没找到 其他")
+
+
+def do_work():
+    print("做题")
+    to_see = Selector().xpath("//*[@name='去答题']").find()
+    if to_see:
+        to_see.click()
+        time.sleep(1)
+        aiguo = Selector().x(107).y(190).find()
+        if aiguo:
+            aiguo.click()
+            time.sleep(1)
+            to_do = Selector().x(91).y(624).find()
+            if to_do:
+                print(to_do.info)
+                to_do.click()
+                time.sleep(1)
+            else:
+                print("没找到开始答题")
+        else:
+            print("cant find aiguo")
+
+
+def chuang_guan():
+    print("闯关")
+
+
+def signle_v2free():
+    system.open_url("https://w1.v2free.cc/user")
+    time.sleep(3)
+    know_btn = Selector().xpath("//*[@name='知道了']").find()
+    while True:
+        if know_btn:
+            know_btn.click()
+            break
+        else:
+            time.sleep(3)
+    time.sleep(3)
+    # 滑动显示签到
+    action.slide(15, 655, 15, 311)
+    time.sleep(3)
+    # 点击签到
+    single_btn = Selector().xpath("//*[@name='check  点我签到获取流量']").find()
+    if single_btn:
+        print("点我获取流量")
+        single_btn.click()
+    else:
+        print("没有找到点我获取流量")
+    time.sleep(3)
+    # 领到之后点知道
+    Selector().label("知道了").click(0).find()
+    time.sleep(3)
+
+
+def test_click():
+    # open safari
+    # system.open_url("https://w1.v2free.cc/user")
+    # time.sleep(3)
+    # Selector().label("知道了").click(0).find()
+    # time.sleep(3)
+    # 滑动显示签到
+    action.slide(15, 311, 15, 655)
+    time.sleep(3)
+    # 点击签到
+    # Selector().name("check  点我签到获取流量").click(0).find()
+    # time.sleep(3)
+    # # 领到之后点知道
+    # Selector().label("知道了").click(0).find()
+    # time.sleep(3)
+
+
+def main():
+    signle_v2free()
+    open_huzhijiao()
+
+
+# test_click()
+main()
