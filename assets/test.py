@@ -177,8 +177,8 @@ def chuang_guan():
 def signle_v2free():
     system.open_url("https://w1.v2free.cc/user")
     time.sleep(3)
-    know_btn = Selector().xpath("//*[@name='知道了']").find()
     while True:
+        know_btn = Selector().xpath("//*[@name='知道了']").find()
         if know_btn:
             know_btn.click()
             break
